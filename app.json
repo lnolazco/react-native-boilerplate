@@ -5,6 +5,7 @@
     "slug": "Boilerplate",
     "privacy": "public",
     "sdkVersion": "31.0.0",
+    "entryPoint": "./src/App.js",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,9 +18,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
