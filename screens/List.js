@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-// import { List, ListItem, SearchBar } from 'react-native-elements';
+import { FlatList } from 'react-native';
+import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
 
 class FlatListDemo extends Component {
   constructor(props) {
@@ -64,100 +64,70 @@ class FlatListDemo extends Component {
     );
   };
 
-  renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%',
-        }}
-      />
-    );
-  };
+  // renderSeparator = () => {
+  //   return (
+  //     <View
+  //       style={{
+  //         height: 1,
+  //         width: '86%',
+  //         backgroundColor: '#CED0CE',
+  //         marginLeft: '14%',
+  //       }}
+  //     />
+  //   );
+  // };
 
   // renderHeader = () => {
   //   return <SearchBar placeholder="Type Here..." lightTheme round />;
   // };
 
-  renderFooter = () => {
-    if (!this.state.loading) return null;
+  // renderFooter = () => {
+  //   if (!this.state.loading) return null;
 
-    return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: '#CED0CE',
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
-  };
-
-  // <ListItem
-  //   roundAvatar
-  //   title={`${item.name.first} ${item.name.last}`}
-  //   subtitle={item.email}
-  //   avatar={{ uri: item.picture.thumbnail }}
-  //   containerStyle={{ borderBottomWidth: 0 }}
-  // />
+  //   return (
+  //     <View
+  //       style={{
+  //         paddingVertical: 20,
+  //         borderTopWidth: 1,
+  //         borderColor: '#CED0CE',
+  //       }}
+  //     >
+  //       <ActivityIndicator animating size="large" />
+  //     </View>
+  //   );
+  // };
 
   render() {
     return (
-      // <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-      <View>
-        <FlatList
-          data={this.state.data}
-          renderItem={({ item }) => (
-            <View>
+      <FlatList
+        data={this.state.data}
+        renderItem={({ item }) => (
+          <ListItem thumbnail>
+            <Left>
+              <Thumbnail square source={{ uri: item.picture.thumbnail }} />
+            </Left>
+            <Body>
               <Text>{`${item.name.first} ${item.name.last}`}</Text>
-              <Text>{item.email}</Text>
-            </View>
-          )}
-          keyExtractor={item => item.email}
-          ItemSeparatorComponent={this.renderSeparator}
-          // ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
-          onRefresh={this.handleRefresh}
-          refreshing={this.state.refreshing}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={50}
-        />
-      </View>
+              <Text note>Email: </Text>
+            </Body>
+            <Right>
+              <Button transparent>
+                <Text>View</Text>
+              </Button>
+            </Right>
+          </ListItem>
+        )}
+        keyExtractor={item => item.login.uuid}
+        // ItemSeparatorComponent={this.renderSeparator}
+        // ListHeaderComponent={this.renderHeader}
+        // ListFooterComponent={this.renderFooter}
+        onRefresh={this.handleRefresh}
+        refreshing={this.state.refreshing}
+        onEndReached={this.handleLoadMore}
+        onEndReachedThreshold={50}
+      />
     );
   }
 }
 
 export default FlatListDemo;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     marginTop: 50,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   h2text: {
-//     marginTop: 10,
-//     fontFamily: 'Helvetica',
-//     fontSize: 36,
-//     fontWeight: 'bold',
-//   },
-//   flatview: {
-//     justifyContent: 'center',
-//     paddingTop: 30,
-//     borderRadius: 2,
-//   },
-//   name: {
-//     fontFamily: 'Verdana',
-//     fontSize: 18
-//   },
-//   email: {
-//     color: 'red'
-//   }
-
-// });
