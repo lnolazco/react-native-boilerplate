@@ -1,6 +1,19 @@
 import React from 'react';
-import { AsyncStorage, StatusBar } from "react-native";
-import { Container, Header, Title, Left, Icon, Right, Button, Body, Content,Text, Card, CardItem } from "native-base";
+import { AsyncStorage } from 'react-native';
+import {
+  Container,
+  Header,
+  Title,
+  Left,
+  Icon,
+  Right,
+  Button,
+  Body,
+  Content,
+  Text,
+  Card,
+  CardItem,
+} from 'native-base';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -14,6 +27,11 @@ export default class HomeScreen extends React.Component {
     ),
   };
 
+  signOut = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
+
   render() {
     return (
       <Container>
@@ -21,7 +39,8 @@ export default class HomeScreen extends React.Component {
           <Left>
             <Button
               transparent
-              onPress={() => this.props.navigation.openDrawer()}>
+              onPress={() => this.props.navigation.openDrawer()}
+            >
               <Icon ios="ios-menu" android="md-menu" style={{ fontSize: 20 }} />
             </Button>
           </Left>
@@ -38,15 +57,26 @@ export default class HomeScreen extends React.Component {
               </Body>
             </CardItem>
           </Card>
-          <Button full rounded dark
+          <Button
+            full
+            rounded
+            dark
             style={{ marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate('Chat')}>
+            onPress={() => this.props.navigation.navigate('Chat')}
+          >
             <Text>Chat With People</Text>
           </Button>
-          <Button full rounded primary
+          <Button
+            full
+            rounded
+            primary
             style={{ marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate('List')}>
+            onPress={() => this.props.navigation.navigate('List')}
+          >
             <Text>Goto List</Text>
+          </Button>
+          <Button full rounded style={{ marginTop: 10 }} onPress={this.signOut}>
+            <Text>Log out</Text>
           </Button>
         </Content>
       </Container>

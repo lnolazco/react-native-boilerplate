@@ -1,28 +1,52 @@
 import React from 'react';
-import { View, Button, StyleSheet, AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import {
+  Container,
+  Header,
+  Content,
+  Form,
+  Item,
+  Input,
+  Label,
+  Button,
+  Text,
+} from 'native-base';
 
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button title="Sign in!" onPress={this._signInAsync} />
-      </View>
-    );
-  }
-
-  _signInAsync = async () => {
+  signIn = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('App');
   };
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});
+  render() {
+    return (
+      <Container>
+        <Header />
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>Username</Label>
+              <Input />
+            </Item>
+            <Item floatingLabel last>
+              <Label>Password</Label>
+              <Input secureTextEntry={true} />
+            </Item>
+            <Button
+              full
+              primary
+              style={{ marginTop: 10 }}
+              onPress={this.signIn}
+            >
+              <Text>Sign in</Text>
+            </Button>
+          </Form>
+        </Content>
+      </Container>
+    );
+  }
+}
