@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
+import { Container, Header, Content, List, ListItem, Icon, Thumbnail, Text, Left, Body, Right, Button } from 'native-base';
 
 class FlatListDemo extends Component {
-  constructor(props) {
-    super(props);
+  static navigationOptions = {
+    drawerLabel: 'List',
+    drawerIcon: () => (
+      <Icon
+        ios="ios-people"
+        android="md-people"
+        style={{ fontSize: 20, color: 'red' }}
+      />
+    ),
+  };
 
-    this.state = {
-      loading: false,
-      data: [],
-      page: 1,
-      seed: 1,
-      error: null,
-      refreshing: false,
-    };
-  }
+  state = {
+    loading: false,
+    data: [],
+    page: 1,
+    seed: 1,
+    error: null,
+    refreshing: false,
+  };
 
   componentDidMount() {
     this.makeRemoteRequest();

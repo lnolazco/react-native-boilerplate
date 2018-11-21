@@ -3,8 +3,20 @@ import { Platform } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import CustomView from '../components/CustomView';
 import CustomActions from '../components/CustomActions';
+import { Container, Icon, Header, Left, Button, Body, Title, Right, Content } from 'native-base';
 
-export default class Example extends React.Component {
+export default class ChatScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Chat',
+    drawerIcon: () => (
+      <Icon
+        ios="ios-chatbubbles"
+        android="chat"
+        style={{ fontSize: 20, color: 'red' }}
+      />
+    ),
+  };
+
   state = {
     messages: [],
   };
@@ -60,15 +72,30 @@ export default class Example extends React.Component {
 
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        renderCustomView={this.renderCustomView}
-        renderActions={this.renderCustomActions}
-        user={{
-          _id: 1,
-        }}
-      />
+      <Container>
+        <Header>
+          <Left>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.openDrawer()}>
+              <Icon ios="ios-menu" android="md-menu" style={{ fontSize: 20 }} />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Chat</Title>
+          </Body>
+          <Right />
+        </Header>
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={messages => this.onSend(messages)}
+            renderCustomView={this.renderCustomView}
+            renderActions={this.renderCustomActions}
+            user={{
+              _id: 1,
+            }}
+          />
+      </Container>
     );
   }
 }

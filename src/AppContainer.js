@@ -5,12 +5,13 @@ import {
   createAppContainer,
 } from 'react-navigation';
 
-import HomeScreen from './screens/Home';
-import SignInScreen from './screens/SignIn';
-import ChatScreen from './screens/Chat';
-import AuthLoadingScreen from './screens/AuthLoading';
+import HomeScreen from './screens/HomeScreen';
+import SignInScreen from './screens/SignInScreen';
+import ChatScreen from './screens/ChatScreen';
+import ListScreen from './screens/ListScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
 
-const AppStack = createDrawerNavigator({ Home: HomeScreen, Other: ChatScreen });
+const AppStack = createDrawerNavigator({ Home: HomeScreen, Chat: ChatScreen, List: ListScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
 export default createAppContainer(
