@@ -7,6 +7,7 @@ import {
 
 import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ChatScreen from './screens/ChatScreen';
 import FlatListScreen from './screens/FlatListScreen';
 import ListViewScreen from './screens/ListViewScreen';
@@ -21,7 +22,10 @@ const AppStack = createDrawerNavigator({
   ListView: ListViewScreen,
 });
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const AuthStack = createStackNavigator({
+  SignIn: SignInScreen,
+  ForgotPassword: ForgotPasswordScreen,
+});
 
 export default createAppContainer(
   createSwitchNavigator(

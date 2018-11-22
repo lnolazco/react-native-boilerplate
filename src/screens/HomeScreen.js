@@ -1,23 +1,11 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import {
-  Container,
-  Header,
-  Title,
-  Left,
-  Icon,
-  Right,
-  Button,
-  Body,
-  Content,
-  Text,
-  Card,
-  CardItem,
-} from 'native-base';
+import { Icon, Button, Body, Content, Text, Card, CardItem } from 'native-base';
+import ScreenContainer from '../components/ScreenContainer';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home drawer',
+    drawerLabel: 'Home',
     drawerIcon: () => (
       <Icon
         ios="ios-menu"
@@ -34,21 +22,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Header>
-          <Left>
-            <Button
-              transparent
-              onPress={() => this.props.navigation.openDrawer()}
-            >
-              <Icon ios="ios-menu" android="md-menu" style={{ fontSize: 20 }} />
-            </Button>
-          </Left>
-          <Body>
-            <Title>HomeScreen</Title>
-          </Body>
-          <Right />
-        </Header>
+      <ScreenContainer title="Home" navigation={this.props.navigation}>
         <Content padder>
           <Card>
             <CardItem>
@@ -79,7 +53,7 @@ export default class HomeScreen extends React.Component {
             <Text>Log out</Text>
           </Button>
         </Content>
-      </Container>
+      </ScreenContainer>
     );
   }
 }

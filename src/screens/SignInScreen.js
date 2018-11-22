@@ -1,5 +1,5 @@
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Linking } from 'react-native';
 import {
   Container,
   Header,
@@ -20,6 +20,15 @@ export default class SignInScreen extends React.Component {
   signIn = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('App');
+  };
+
+  signUp = () => {
+    const url = 'https://www.mignonne.com/inscription.php';
+    Linking.openURL(url);
+  };
+
+  forgotPassword = () => {
+    this.props.navigation.navigate('ForgotPassword');
   };
 
   render() {
@@ -43,6 +52,17 @@ export default class SignInScreen extends React.Component {
               onPress={this.signIn}
             >
               <Text>Sign in</Text>
+            </Button>
+            <Button full light style={{ marginTop: 10 }} onPress={this.signUp}>
+              <Text>Sign up</Text>
+            </Button>
+            <Button
+              transparent
+              full
+              style={{ marginTop: 10 }}
+              onPress={this.forgotPassword}
+            >
+              <Text>Forgot password</Text>
             </Button>
           </Form>
         </Content>
