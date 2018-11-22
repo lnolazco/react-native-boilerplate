@@ -8,7 +8,8 @@ import {
 import HomeScreen from './screens/HomeScreen';
 import SignInScreen from './screens/SignInScreen';
 import ChatScreen from './screens/ChatScreen';
-import ListScreen from './screens/ListScreen';
+import FlatListScreen from './screens/FlatListScreen';
+import ListViewScreen from './screens/ListViewScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 
 // To customize the menu:
@@ -16,7 +17,8 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen';
 const AppStack = createDrawerNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
-  List: ListScreen,
+  FlatList: FlatListScreen,
+  ListView: ListViewScreen,
 });
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
