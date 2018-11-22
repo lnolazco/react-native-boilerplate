@@ -11,11 +11,6 @@ import ChatScreen from './screens/ChatScreen';
 import ListScreen from './screens/ListScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 
-import React, { Component } from 'react';
-import allReducers from './redux/reducers/index.js';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
 // To customize the menu:
 // https://codeburst.io/custom-drawer-using-react-navigation-80abbab489f7
 const AppStack = createDrawerNavigator({
@@ -26,7 +21,7 @@ const AppStack = createDrawerNavigator({
 
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-const AppContainer = createAppContainer(
+export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
@@ -38,15 +33,3 @@ const AppContainer = createAppContainer(
     }
   )
 );
-
-const store = createStore(allReducers);
-
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <AppContainer />
-      </Provider>
-    );
-  }
-}
