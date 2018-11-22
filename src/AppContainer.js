@@ -12,6 +12,7 @@ import ChatScreen from './screens/ChatScreen';
 import FlatListScreen from './screens/FlatListScreen';
 import ListViewScreen from './screens/ListViewScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 // To customize the menu:
 // https://codeburst.io/custom-drawer-using-react-navigation-80abbab489f7
@@ -20,6 +21,7 @@ const AppStack = createDrawerNavigator({
   Chat: ChatScreen,
   FlatList: FlatListScreen,
   ListView: ListViewScreen,
+  Profile: ProfileScreen,
 });
 
 const AuthStack = createStackNavigator({
