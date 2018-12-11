@@ -1,6 +1,6 @@
 // Implement carousel
 import React, { Component } from 'react';
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions, Image } from 'react-native';
 import Carousel from 'react-native-looped-carousel';
 
 export default class ImageSlider extends Component {
@@ -23,7 +23,10 @@ export default class ImageSlider extends Component {
   render() {
     return (
       <Carousel autoplay={false} style={this.state.size} pageInfo>
-        <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
+        {this.props.images.map(image => (
+          <Image key={image} style={this.state.size} source={{ uri: image }} />
+        ))}
+        {/* <View style={[{ backgroundColor: '#BADA55' }, this.state.size]}>
           <Text>1</Text>
         </View>
         <View style={[{ backgroundColor: 'red' }, this.state.size]}>
@@ -31,7 +34,7 @@ export default class ImageSlider extends Component {
         </View>
         <View style={[{ backgroundColor: 'blue' }, this.state.size]}>
           <Text>3</Text>
-        </View>
+        </View> */}
       </Carousel>
     );
   }
