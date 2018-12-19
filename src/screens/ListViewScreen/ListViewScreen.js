@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import ScreenContainer from '../components/ScreenContainer';
-import InfiniteListView from '../components/List/InfiniteListView';
 import { Icon } from 'native-base';
+
+import ScreenContainer from '../../components/ScreenContainer';
+import ListUsersContainer from '../../redux/containers/ListUsers.container';
 
 export default class ListScreen extends Component {
   static navigationOptions = {
@@ -21,7 +22,7 @@ export default class ListScreen extends Component {
         title="Infinite List View"
         navigation={this.props.navigation}
       >
-        <InfiniteListView />
+        <ListUsersContainer navigation={this.props.navigation} />
       </ScreenContainer>
     );
   }

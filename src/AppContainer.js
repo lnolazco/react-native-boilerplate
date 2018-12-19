@@ -10,7 +10,7 @@ import SignInScreen from './screens/SignInScreen';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
 import ChatScreen from './screens/ChatScreen';
 import FlatListScreen from './screens/FlatListScreen';
-import ListViewScreen from './screens/ListViewScreen';
+import ListViewScreen from './screens/ListViewScreen/ListViewScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import ProfileScreen from './screens/ProfileScreen';
 

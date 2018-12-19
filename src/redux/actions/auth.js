@@ -1,9 +1,12 @@
-import { SIGN_IN, LOG_OUT } from './types';
+export const ActionType = {
+  SIGN_IN: 'SIGN_IN',
+  LOG_OUT: 'LOG_OUT',
+};
 
 export const signIn = () => ({
-  type: SIGN_IN,
+  type: ActionType.SIGN_IN,
 });
 
 export const logOut = () => ({
-  type: LOG_OUT,
+  type: ActionType.LOG_OUT,
 });
