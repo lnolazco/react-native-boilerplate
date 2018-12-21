@@ -16,11 +16,11 @@ export const fetchUsers = () => (dispatch, getState) => {
   });
 
   fetchUsersApi(page)
-    .then(response => {
+    .then(users => {
       dispatch({
         type: ActionType.FETCH_SUCCEED,
         payload: {
-          data: response.users,
+          data: users,
         },
       });
     })
@@ -40,11 +40,11 @@ export const fetchMoreUsers = () => (dispatch, getState) => {
     type: ActionType.FETCH_MORE_REQUESTED,
   });
   fetchUsersApi(page)
-    .then(response => {
+    .then(users => {
       dispatch({
         type: ActionType.FETCH_MORE_SUCCEED,
         payload: {
-          data: response.users,
+          data: users,
         },
       });
     })

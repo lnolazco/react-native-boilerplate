@@ -12,13 +12,13 @@ export const fetchProfile = (userId, navigation) => dispatch => {
   });
 
   fetchApi(userId)
-    .then(response => {
+    .then(user => {
       navigation.navigate('Profile');
-      console.log('Profile response', response);
+      console.log('Profile response', user);
 
       dispatch({
         type: ActionType.FETCH_SUCCEED,
-        payload: response.user,
+        payload: user,
       });
     })
     .catch(error => {

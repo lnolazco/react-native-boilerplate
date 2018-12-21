@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Icon } from 'native-base';
 
-import ScreenContainer from '../components/ScreenContainer';
-import ProfileContainer from '../redux/containers/Profile.container';
+import ScreenWrapper from '../base/ScreenWrapper';
+import ProfileContainer from '../../redux/containers/Profile.container';
+
 export default class ProfileScreen extends Component {
   static navigationOptions = {
     drawerLabel: 'Profile',
@@ -17,9 +18,9 @@ export default class ProfileScreen extends Component {
 
   render() {
     return (
-      <ScreenContainer title="Profile" navigation={this.props.navigation}>
+      <ScreenWrapper title="Profile" navigation={this.props.navigation}>
         <ProfileContainer />
-      </ScreenContainer>
+      </ScreenWrapper>
     );
   }
 }

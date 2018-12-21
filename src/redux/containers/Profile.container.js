@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import ProfileView from '../../components/ProfileView';
+import ProfileView from '../../components/views/ProfileView';
 
 const mapStateToProps = state => ({
   isLoading: state.profile.isLoading,

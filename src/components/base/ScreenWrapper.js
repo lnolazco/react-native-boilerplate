@@ -1,13 +1,20 @@
 import React from 'react';
-import { Container, Icon, Header, Left, Button, Body, Title, Right, Content } from 'native-base';
+import {
+  Container,
+  Icon,
+  Header,
+  Left,
+  Button,
+  Body,
+  Title,
+  Right,
+} from 'native-base';
 
-export default ScreenContainer = ({ navigation, title, children }) => (
+export default ({ navigation, title, children }) => (
   <Container>
     <Header>
       <Left>
-        <Button
-          transparent
-          onPress={() => navigation.openDrawer()}>
+        <Button transparent onPress={() => navigation.openDrawer()}>
           <Icon ios="ios-menu" android="md-menu" style={{ fontSize: 20 }} />
         </Button>
       </Left>
@@ -16,6 +23,6 @@ export default ScreenContainer = ({ navigation, title, children }) => (
       </Body>
       <Right />
     </Header>
-      {children}
+    {children}
   </Container>
 );

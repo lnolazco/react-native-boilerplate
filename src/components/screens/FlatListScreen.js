@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import ScreenWrapper from '../base/ScreenWrapper';
+import InfiniteFlatList from '../base/List/InfiniteFlatList';
 import { Icon } from 'native-base';
-
-import ScreenContainer from '../../components/ScreenContainer';
-import ListUsersContainer from '../../redux/containers/ListUsers.container';
 
 export default class ListScreen extends Component {
   static navigationOptions = {
-    drawerLabel: 'List View',
+    drawerLabel: 'Flat List',
     drawerIcon: () => (
       <Icon
         ios="ios-people"
@@ -18,12 +17,12 @@ export default class ListScreen extends Component {
 
   render() {
     return (
-      <ScreenContainer
-        title="Infinite List View"
+      <ScreenWrapper
+        title="Infinite Flat List"
         navigation={this.props.navigation}
       >
-        <ListUsersContainer navigation={this.props.navigation} />
-      </ScreenContainer>
+        <InfiniteFlatList />
+      </ScreenWrapper>
     );
   }
 }

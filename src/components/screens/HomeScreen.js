@@ -1,7 +1,7 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
 import { Icon, Button, Body, Content, Text, Card, CardItem } from 'native-base';
-import ScreenContainer from '../components/ScreenContainer';
+import ScreenWrapper from '../base/ScreenWrapper';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScreenContainer title="Home" navigation={this.props.navigation}>
+      <ScreenWrapper title="Home" navigation={this.props.navigation}>
         <Content padder>
           <Card>
             <CardItem>
@@ -53,7 +53,7 @@ export default class HomeScreen extends React.Component {
             <Text>Log out</Text>
           </Button>
         </Content>
-      </ScreenContainer>
+      </ScreenWrapper>
     );
   }
 }

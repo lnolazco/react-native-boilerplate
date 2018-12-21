@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ImageSlider from '../components/Images/ImageSlider';
+import ImageSlider from '../base/Images/ImageSlider';
 import { Content, Card, CardItem, Text, Body } from 'native-base';
 
 export default class ProfileView extends Component {
@@ -9,17 +9,10 @@ export default class ProfileView extends Component {
       return null;
     }
 
-    const images = Object.keys(user.gallery).map(
-      key =>
-        `https://www.mignonneapi.com/galeries/${
-          user.gallery[key].picture_rep
-        }/${user.gallery[key].picture}`
-    );
-
     return (
       <Content>
-        {images && images.length ? (
-          <ImageSlider heightPercentaje={50} images={images} />
+        {user.gallery.length ? (
+          <ImageSlider heightPercentaje={50} images={user.gallery} />
         ) : null}
         <Content padder>
           <Card>

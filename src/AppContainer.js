@@ -5,14 +5,14 @@ import {
   createAppContainer,
 } from 'react-navigation';
 
-import HomeScreen from './screens/HomeScreen';
-import SignInScreen from './screens/SignInScreen';
-import ForgotPasswordScreen from './screens/ForgotPasswordScreen';
-import ChatScreen from './screens/ChatScreen';
-import FlatListScreen from './screens/FlatListScreen';
-import ListViewScreen from './screens/ListViewScreen/ListViewScreen';
-import AuthLoadingScreen from './screens/AuthLoadingScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import HomeScreen from './components/screens/HomeScreen';
+import SignInScreen from './components/screens/SignInScreen';
+import ForgotPasswordScreen from './components/screens/ForgotPasswordScreen';
+import ChatScreen from './components/screens/ChatScreen';
+import FlatListScreen from './components/screens/FlatListScreen';
+import ListViewScreen from './components/screens/ListViewScreen';
+import AuthLoadingScreen from './components/screens/AuthLoadingScreen';
+import ProfileScreen from './components/screens/ProfileScreen';
 
 // To customize the menu:
 // https://codeburst.io/custom-drawer-using-react-navigation-80abbab489f7

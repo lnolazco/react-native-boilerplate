@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import InfiniteListView from '../../components/List/InfiniteListView/InfiniteListView';
+import ListUsersView from '../../components/views/ListUsersView';
 import { fetchUsers, fetchMoreUsers } from '../actions/users';
 import { fetchProfile } from '../actions/profile';
 
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(InfiniteListView);
+)(ListUsersView);

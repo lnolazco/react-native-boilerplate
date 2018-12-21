@@ -1,4 +1,5 @@
-import { PROFILE_URL, token } from '../config';
+import { PROFILE_URL, token } from '../config/constants';
+import { normalizeUser } from '../config/normalizers';
 
 export default id => {
   const url = `${PROFILE_URL}/${id}`;
@@ -8,5 +9,7 @@ export default id => {
     headers: new Headers({
       Authorization: `Bearer ${token}`,
     }),
-  }).then(response => response.json());
+  })
+    .then(response => response.json())
+    .then(responseJson => normalizeUser(responseJson));
 };
