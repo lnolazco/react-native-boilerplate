@@ -36,6 +36,20 @@ export default class ProfileView extends Component {
               <Text>{user.gender.name}</Text>
             </CardItem>
           </Card>
+            <CardItem>
+              <Text>Information</Text>
+            </CardItem>
+            <CardItem>
+              <Text>Sexe {user.gender.explicit}</Text>
+              <Text>Age {user.age}</Text>
+              <Text>Pays {user.geoinfos.country}</Text>
+              <Text>Departament {user.geoinfos.region_name}</Text>
+              <Text>Age {user.age}</Text>
+              <Text>Age {user.age}</Text>
+              <Text>Age {user.age}</Text>
+            </CardItem>
+          <Card>
+          </Card>
         </Content>
       </Content>
     );

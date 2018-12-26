@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component {
             rounded
             primary
             style={{ marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate('List')}
+            onPress={() => this.props.navigation.navigate('ListView')}
           >
             <Text>Goto List</Text>
           </Button>

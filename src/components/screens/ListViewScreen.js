@@ -22,7 +22,7 @@ export default class ListScreen extends Component {
         title="Infinite List View"
         navigation={this.props.navigation}
       >
-        <ListUsersContainer navigation={this.props.navigation} />
+        <ListUsersContainer />
       </ScreenWrapper>
     );
   }

@@ -1,4 +1,6 @@
+import React from 'react';
 import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 
 import ListUsersView from '../../components/views/ListUsersView';
 import { fetchUsers, fetchMoreUsers } from '../actions/users';
@@ -13,10 +15,21 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onLoad: () => dispatch(fetchUsers()),
   onEndReached: () => dispatch(fetchMoreUsers()),
-  onSelectRow: userId => dispatch(fetchProfile(userId, ownProps.navigation)),
+  openProfile: (userId, onSuccess) => dispatch(fetchProfile(userId, onSuccess)),
 });
 
-export default connect(
+class ListUsersContainer extends React.Component {
+  onSelectRow = userId => {
+    this.props.openProfile(userId, () => {
+      this.props.navigation.navigate('Profile');
+    });
+  }
+  render() {
+    return (<ListUsersView {...this.props} onSelectRow={this.onSelectRow} />)
+  }
+}
+
+export default withNavigation(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ListUsersView);
+)(ListUsersContainer));

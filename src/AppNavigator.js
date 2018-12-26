@@ -19,7 +19,7 @@ import ProfileScreen from './components/screens/ProfileScreen';
 const AppStack = createDrawerNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
-  FlatList: FlatListScreen,
+  // FlatList: FlatListScreen,
   ListView: ListViewScreen,
   Profile: ProfileScreen,
 });
@@ -29,7 +29,7 @@ const AuthStack = createStackNavigator({
   ForgotPassword: ForgotPasswordScreen,
 });
 
-export default createAppContainer(
+const AppNavigator = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
@@ -41,3 +41,5 @@ export default createAppContainer(
     }
   )
 );
+
+export default AppNavigator;

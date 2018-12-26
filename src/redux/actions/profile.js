@@ -6,15 +6,14 @@ export const ActionType = {
   FETCH_FAILED: 'PROFILE_FETCH_FAILED',
 };
 
-export const fetchProfile = (userId, navigation) => dispatch => {
+export const fetchProfile = (userId, onSuccess) => dispatch => {
   dispatch({
     type: ActionType.FETCH_REQUESTED,
   });
 
   fetchApi(userId)
     .then(user => {
-      navigation.navigate('Profile');
-      console.log('Profile response', user);
+      onSuccess();
 
       dispatch({
         type: ActionType.FETCH_SUCCEED,
