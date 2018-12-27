@@ -1,73 +1,53 @@
-// import { combineReducers } from 'redux';
-// import { NavigationActions } from 'react-navigation';
-// import { AppNavigator } from '../../AppNavigator';
-
-// const router = AppNavigator.router;
-// const mainNavAction = router.getActionForPathAndParams('AuthLoading');
-// const initialNavState = router.getStateForAction(mainNavAction);
-
-// const NavReducer = (state = initialNavState, action) => {
-//     return router.getStateForAction(action, state);
-// };
-
-// export default NavReducer;
-
-
-import {
-  createNavigationReducer,
-} from 'react-navigation-redux-helpers';
-import AppNavigator from '../../AppNavigator';
-
-export default createNavigationReducer(AppNavigator);
-
-/*
 import { NavigationActions } from 'react-navigation';
 
-import { nav_actions } from '../actions/types';
-import { AppNavigator } from '../../navigator';
+import { ActionType } from '../actions/nav';
+import AppNavigator from '../../AppNavigator';
 
-const initialState = AppNavigator.router.getStateForAction(NavigationActions.init());
-// const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'));
+const initialState = AppNavigator.router.getStateForAction(
+  NavigationActions.init()
+);
 
-export const nav = (state = initialState, action) => {
-    let nextState;
+const navigate = (props, state) =>
+  AppNavigator.router.getStateForAction(
+    NavigationActions.navigate(props),
+    state
+  );
 
-    switch (action.type) {
-    case nav_actions.SIGNEDIN:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({ routeName: 'SignedIn' }),
-            state
-        );
-        break;
-    case nav_actions.FORGOT_PASSWORD:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({ routeName: 'ForgotPassword' }),
-            state
-        );
-        break;
-    case nav_actions.PROFILE:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({ routeName: 'Profile', params: { id: action.id } }),
-            state
-        );
-        break;
-    case nav_actions.LIST:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({ routeName: 'List', params: { filter: action.filter } }),
-            state
-        );
-        break;
-    case nav_actions.CHAT:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({ routeName: 'Chat', params: { data: action.data } }),
-            state
-        );
-        break;
+export default function nav(state = initialState, action) {
+  let nextState;
+
+  switch (action.type) {
+    case ActionType.NAV_AUTH:
+      nextState = navigate({ routeName: 'Auth' }, state);
+      break;
+    case ActionType.NAV_APP:
+      nextState = navigate({ routeName: 'App' }, state);
+      break;
+    case ActionType.NAV_LOGIN:
+      nextState = navigate({ routeName: 'SignIn' }, state);
+      break;
+    case ActionType.NAV_LOGOUT:
+      nextState = navigate({ routeName: 'AuthLoading' }, state);
+      break;
+    case ActionType.NAV_FORGOTPASSWORD:
+      nextState = navigate({ routeName: 'ForgotPassword' }, state);
+      break;
+    case ActionType.NAV_HOME:
+      nextState = navigate({ routeName: 'Home' }, state);
+      break;
+    case ActionType.NAV_CHAT:
+      nextState = navigate({ routeName: 'Chat' }, state);
+      break;
+    case ActionType.NAV_LIST:
+      nextState = navigate({ routeName: 'ListView' }, state);
+      break;
+    case ActionType.NAV_USERPROFILE:
+      nextState = navigate({ routeName: 'Profile' }, state);
+      break;
     default:
-        nextState = AppNavigator.router.getStateForAction(action, state);
-        break;
-    }
+      nextState = AppNavigator.router.getStateForAction(action, state);
+      break;
+  }
   // Simply return the original `state` if `nextState` is null or undefined.
   return nextState || state;
-};
-*/
+}

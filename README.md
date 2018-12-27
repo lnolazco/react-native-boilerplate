@@ -33,3 +33,21 @@ expo start
 - Redux
 - Redux form
 - Carousel (https://github.com/phil-r/react-native-looped-carousel)
+
+## Scaffolding
+
+- /src source code
+- - /apis calls to external apis
+- - - fetch.js generic call to external apis
+- - /components all the react components
+- - - /base stateless components
+- - - /screens
+- - - /views containers of the views, for example a list or a profile view or the login form
+- - /config
+- - - constants.js all the constants used in the app
+- - - normalizers.js converts json to usefull data structures.
+- - /redux
+- - - /actions
+- - - /containers the components that wraps the views
+- - - /reducers
+- - - store.js
