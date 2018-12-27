@@ -1,15 +1,10 @@
-import { PROFILE_URL, token } from '../config/constants';
+import { ApiUrls } from '../config/constants';
 import { normalizeUser } from '../config/normalizers';
+import fetchApi from './fetch';
 
-export default id => {
-  const url = `${PROFILE_URL}/${id}`;
+export default async id => {
+  const url = `${ApiUrls.userProfile}/${id}`;
 
-  return fetch(url, {
-    method: 'GET',
-    headers: new Headers({
-      Authorization: `Bearer ${token}`,
-    }),
-  })
-    .then(response => response.json())
-    .then(responseJson => normalizeUser(responseJson));
+  const response = await fetchApi(url);
+  return await normalizeUser(response);
 };

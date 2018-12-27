@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
         isLoading: false,
         dataSource: ds.cloneWithRows(data1),
         data: data1,
-        page: 1,
+        page: 2,
       };
     case ActionType.FETCH_FAILED:
       return { ...state, isLoading: false, isLoadingMore: false };

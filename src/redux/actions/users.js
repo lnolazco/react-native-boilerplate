@@ -9,7 +9,7 @@ export const ActionType = {
 };
 
 export const fetchUsers = () => (dispatch, getState) => {
-  const { page } = getState();
+  const { page } = getState().users;
 
   dispatch({
     type: ActionType.FETCH_REQUESTED,
@@ -34,7 +34,7 @@ export const fetchUsers = () => (dispatch, getState) => {
 };
 
 export const fetchMoreUsers = () => (dispatch, getState) => {
-  const { page } = getState();
+  const { page } = getState().users;
 
   dispatch({
     type: ActionType.FETCH_MORE_REQUESTED,
