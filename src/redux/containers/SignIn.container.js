@@ -1,24 +1,26 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
+import { Linking } from 'react-native';
 
 import { signIn } from '../actions/auth';
-import { navigateToApp, navigateToForgotPassword } from '../actions/nav';
+import { navigateToForgotPassword } from '../actions/nav';
 import { SIGNUP_URL } from '../../config/constants';
+import SignInView from '../../components/views/SignInView';
+import { isAuthLoadingSelector } from '../selectors/auth';
 
 const mapStateToProps = state => ({
-  isLoading: 
-  signUpUrl: SIGNUP_URL,
+  isLoading: isAuthLoadingSelector(state),
+  onSignUp: () => {
+    Linking.openURL(SIGNUP_URL);
+  },
 });
 
 const mapDispatchToProps = dispatch => ({
-  signIn: (user, password) => {
-    dispatch(signIn(user, password));
-  },
-  forgotPassword : () => dispatch(navigateToForgotPassword()),
+  onSignIn: (user, password) =>
+    dispatch(signIn('plumette@lamethode.com', 'pout1000')),
+  forgotPassword: () => dispatch(navigateToForgotPassword()),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInScreen);
+)(SignInView);

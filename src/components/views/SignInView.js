@@ -1,5 +1,4 @@
 import React from 'react';
-import { Linking } from 'react-native';
 import {
   Container,
   Header,
@@ -11,28 +10,27 @@ import {
   Button,
   Text,
 } from 'native-base';
+import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
+});
 
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
     title: 'Please sign in',
   };
 
-  signIn = async () => {
-    await AsyncStorage.setItem('auth-user-key', 'abc');
-    this.props.navigation.navigate('App');
-  };
-
-  signUp = () => {
-    const url = 'https://www.mignonne.com/inscription.php';
-    Linking.openURL(url);
-  };
-
-  forgotPassword = () => {
-    this.props.navigation.navigate('ForgotPassword');
-  };
-
   render() {
-    return (
+    return this.props.isLoading ? (
+      <View style={styles.container}>
+        <ActivityIndicator />
+        <StatusBar barStyle="default" />
+      </View>
+    ) : (
       <Container>
         <Header />
         <Content>
@@ -49,18 +47,23 @@ export default class SignInScreen extends React.Component {
               full
               primary
               style={{ marginTop: 10 }}
-              onPress={this.signIn}
+              onPress={this.props.onSignIn}
             >
               <Text>Sign in</Text>
             </Button>
-            <Button full light style={{ marginTop: 10 }} onPress={this.signUp}>
+            <Button
+              full
+              light
+              style={{ marginTop: 10 }}
+              onPress={this.props.onSignUp}
+            >
               <Text>Sign up</Text>
             </Button>
             <Button
               transparent
               full
               style={{ marginTop: 10 }}
-              onPress={this.forgotPassword}
+              onPress={this.props.onForgotPassword}
             >
               <Text>Forgot password</Text>
             </Button>
