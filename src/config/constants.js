@@ -14,3 +14,5 @@ export const ApiUrls = {
 export const GALLERIES_PATH = 'https://www.mignonneapi.com/galeries';
 export const THUMB_NOT_FOUND = 'https://via.placeholder.com/70x70.jpg';
 export const THUMBS_PATH = 'https://www.mignonneapi.com/menu_thumbs';
+
+export const SIGNUP_URL = 'https://www.mignonne.com/inscription.php';
