@@ -11,8 +11,8 @@ import ForgotPasswordScreen from './components/screens/ForgotPasswordScreen';
 import ChatScreen from './components/screens/ChatScreen';
 import ListViewScreen from './components/screens/ListViewScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
-import AuthContainer from './redux/containers/Auth.container';
 import SignInContainer from './redux/containers/SignIn.container';
+import AuthContainer from './redux/containers/Auth.container';
 
 // To customize the menu:
 // https://codeburst.io/custom-drawer-using-react-navigation-80abbab489f7

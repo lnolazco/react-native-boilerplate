@@ -8,3 +8,10 @@ export default async id => {
   const response = await fetchApi(url);
   return await normalizeUser(response);
 };
+
+export async function fetchMyUserProfile() {
+  const url = `${ApiUrls.userProfile}/myself`;
+
+  const response = await fetchApi(url);
+  return await normalizeUser(response);
+}

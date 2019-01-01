@@ -1,5 +1,5 @@
-export const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm1pZ25vbm5lLmNvbSIsImlhdCI6MTU0MjM1Njg4NSwiZXhwIjoxNTU3OTkxNjg1LCJpZCI6IjU5MzkxMCIsInRva2VuaWQiOiI1YmVlN2Y5NWVmZGE1In0.PTKPVCSahzE-yNBzhu-E4ApEN71FXv3QzS4Kz--HPrw';
+// export const token =
+  // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvd3d3Lm1pZ25vbm5lLmNvbSIsImlhdCI6MTU0MjM1Njg4NSwiZXhwIjoxNTU3OTkxNjg1LCJpZCI6IjU5MzkxMCIsInRva2VuaWQiOiI1YmVlN2Y5NWVmZGE1In0.PTKPVCSahzE-yNBzhu-E4ApEN71FXv3QzS4Kz--HPrw';
 export const AUTH_USER_KEY = 'auth-user-key';
 
 const BASE_URL = 'https://www.mignonneapi.com';

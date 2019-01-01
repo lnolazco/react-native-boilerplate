@@ -28,3 +28,7 @@ export const fetchProfile = (userId, onSuccess) => dispatch => {
       });
     });
 };
+
+export const fetchMyUserProfile = () => dispatch => {
+  
+}

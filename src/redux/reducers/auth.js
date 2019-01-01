@@ -9,11 +9,11 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ActionType.REQUEST_INIT:
-      return { ...state, loading: true };
+      return { ...initialState, loading: true };
     case ActionType.SIGN_IN:
-      return { ...state, loading: false, authenticated: true };
+      return { ...initialState, authenticated: true };
     case ActionType.REQUEST_FAILED:
-      return { ...state, loading: false, authenticated: false, failed: true };
+      return { ...initialState, failed: true };
     case ActionType.LOG_OUT:
       return initialState;
     default:

@@ -4,7 +4,7 @@ import { Linking } from 'react-native';
 import { signIn } from '../actions/auth';
 import { navigateToForgotPassword } from '../actions/nav';
 import { SIGNUP_URL } from '../../config/constants';
-import SignInView from '../../components/views/SignInView';
+import SignInScreen from '../../components/screens/SignInScreen';
 import { isAuthLoadingSelector } from '../selectors/auth';
 
 const mapStateToProps = state => ({
@@ -23,4 +23,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignInView);
+)(SignInScreen);
