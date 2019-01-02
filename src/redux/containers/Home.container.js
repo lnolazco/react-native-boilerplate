@@ -1,13 +1,11 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
-import { isAuthenticatedSelector } from '../selectors/auth';
 import { logOut } from '../actions/auth';
-import { navigateToChat, navigateToList } from '../actions/nav';
+import { navigateToChat, navigateToSearch } from '../actions/nav';
 
 const mapDispatchToProps = dispatch => ({
   onNavigateToChat: () => dispatch(navigateToChat()),
-  onNavigateToList: () => dispatch(navigateToList()),
+  onNavigateToSearch: () => dispatch(navigateToSearch()),
   onNavigateToLogout: () => dispatch(logOut()),
 });
 

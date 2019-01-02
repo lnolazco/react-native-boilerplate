@@ -43,7 +43,7 @@ expo start
     - fetch.js generic call to external apis
   - /components all the react components
     - /base stateless components
-    - /screens 
+    - /screens
     - /views
   - /config
     - constants.js all the constants used in the app
@@ -59,14 +59,14 @@ Screen definition:
 
 ```js
 <SearchScreen>
-  <ScreenHeader />
+  <ScreenHeader title="Search users" />
   <SearchContainer
     render={props => (
       <Content>
         <UsersFilter {...props.filter} />
-        <ListUsersView {...props.result} />
+        <ListUsersView {...props.results} />
       </Content>
     )}
   />
-</ComponentScreen>
+</SearchScreen>
 ```

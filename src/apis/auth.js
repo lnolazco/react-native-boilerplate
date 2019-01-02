@@ -7,6 +7,6 @@ export async function fetchSignIn(user_email, user_password) {
   return await fetchApiJson(ApiUrls.login, 'POST', body);
 }
 
-export async function fetchLogout() {
-  return fetchApi(ApiUrls.logout);
+export async function fetchLogOut() {
+  return await fetchApi(ApiUrls.logout);
 }

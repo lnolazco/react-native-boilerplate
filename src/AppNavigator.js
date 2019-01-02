@@ -6,10 +6,9 @@ import {
 } from 'react-navigation';
 
 import HomeScreen from './components/screens/HomeScreen';
-// import SignInScreen from './components/screens/SignInScreen';
 import ForgotPasswordScreen from './components/screens/ForgotPasswordScreen';
 import ChatScreen from './components/screens/ChatScreen';
-import ListViewScreen from './components/screens/ListViewScreen';
+import SearchScreen from './components/screens/SearchScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
 import SignInContainer from './redux/containers/SignIn.container';
 import AuthContainer from './redux/containers/Auth.container';
@@ -19,7 +18,7 @@ import AuthContainer from './redux/containers/Auth.container';
 const AppStack = createDrawerNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
-  ListView: ListViewScreen,
+  Search: SearchScreen,
   Profile: ProfileScreen,
 });
 

@@ -38,8 +38,8 @@ export default function nav(state = initialState, action) {
     case ActionType.NAV_CHAT:
       nextState = navigate({ routeName: 'Chat' }, state);
       break;
-    case ActionType.NAV_LIST:
-      nextState = navigate({ routeName: 'ListView' }, state);
+    case ActionType.NAV_SEARCH:
+      nextState = navigate({ routeName: 'Search' }, state);
       break;
     case ActionType.NAV_USERPROFILE:
       nextState = navigate({ routeName: 'Profile' }, state);

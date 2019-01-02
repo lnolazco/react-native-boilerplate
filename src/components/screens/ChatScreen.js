@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ScreenWrapper from '../base/ScreenWrapper';
+import { Container, Icon } from 'native-base';
+import NavHeader from '../base/NavHeader';
 import Chat from '../base/Chat/Chat';
-import { Icon } from 'native-base';
 
 export default class ChatScreen extends Component {
   static navigationOptions = {
@@ -17,9 +17,10 @@ export default class ChatScreen extends Component {
 
   render() {
     return (
-      <ScreenWrapper title="Chat" navigation={this.props.navigation}>
+      <Container>
+        <NavHeader title="Chat" />
         <Chat />
-      </ScreenWrapper>
+      </Container>
     );
   }
 }

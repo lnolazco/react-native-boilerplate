@@ -1,9 +1,9 @@
 import React from 'react';
-import { Icon } from 'native-base';
+import { Container, Icon } from 'native-base';
 
 import HomeContainer from '../../redux/containers/Home.container';
 import HomeView from '../views/HomeView';
-import ScreenWrapper from '../base/ScreenWrapper';
+import NavHeader from '../base/NavHeader';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -19,13 +19,10 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScreenWrapper title="Home" navigation={this.props.navigation}>
-        <HomeContainer render={
-          (props) => (
-            <HomeView {...props} />
-          )
-        } />
-      </ScreenWrapper>
+      <Container>
+        <NavHeader title="Home" />
+        <HomeContainer render={props => <HomeView {...props} />} />
+      </Container>
     );
   }
-};
+}

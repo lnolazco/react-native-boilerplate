@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Icon } from 'native-base';
+import { Container, Icon } from 'native-base';
 
-import ScreenWrapper from '../base/ScreenWrapper';
+import NavHeader from '../base/NavHeader';
 import ProfileContainer from '../../redux/containers/Profile.container';
 
 export default class ProfileScreen extends Component {
@@ -18,9 +18,10 @@ export default class ProfileScreen extends Component {
 
   render() {
     return (
-      <ScreenWrapper title="Profile" navigation={this.props.navigation}>
+      <Container>
+        <NavHeader title="Profile" backButton={true} />
         <ProfileContainer />
-      </ScreenWrapper>
+      </Container>
     );
   }
 }

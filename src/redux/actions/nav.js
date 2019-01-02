@@ -6,7 +6,7 @@ export const ActionType = {
   NAV_APP: 'NAV_APP',
   NAV_HOME: 'NAV_HOME',
   NAV_CHAT: 'NAV_CHAT',
-  NAV_LIST: 'NAV_LIST',
+  NAV_SEARCH: 'NAV_SEARCH',
   NAV_USERPROFILE: 'NAV_USERPROFILE',
 };
 
@@ -38,8 +38,8 @@ export const navigateToChat = () => ({
   type: ActionType.NAV_CHAT,
 });
 
-export const navigateToList = () => ({
-  type: ActionType.NAV_LIST,
+export const navigateToSearch = () => ({
+  type: ActionType.NAV_SEARCH,
 });
 
 export const navigateToUserProfile = () => ({

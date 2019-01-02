@@ -28,7 +28,8 @@ export const signIn = (email, password) => async dispatch => {
 export const logOut = () => async dispatch => {
   await AsyncStorage.removeItem(AUTH_USER_KEY);
 
-  await fetchLogOut();
+  const response = await fetchLogOut();
+  console.log('Logout ', response);
 
   dispatch({ type: ActionType.LOG_OUT });
 
@@ -37,7 +38,7 @@ export const logOut = () => async dispatch => {
 
 export const checkAuthentication = () => async dispatch => {
   dispatch({ type: ActionType.REQUEST_INIT });
-  
+
   const token = await AsyncStorage.getItem(AUTH_USER_KEY);
 
   const action = {

@@ -11,7 +11,6 @@ export default async function fetchApi(url, method = 'GET', body) {
     }),
     ...(body && { body: JSON.stringify(body) }),
   });
-
   return await response.json();
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Body, Content, Text, Card, CardItem } from 'native-base';
 
-export default (props) => (
+export default props => (
   <Content padder>
     <Card>
       <CardItem>
@@ -24,11 +24,16 @@ export default (props) => (
       rounded
       primary
       style={{ marginTop: 10 }}
-      onPress={props.onNavigateToList}
+      onPress={props.onNavigateToSearch}
     >
       <Text>Goto List</Text>
     </Button>
-    <Button full rounded style={{ marginTop: 10 }} onPress={props.onNavigateToLogout}>
+    <Button
+      full
+      rounded
+      style={{ marginTop: 10 }}
+      onPress={props.onNavigateToLogout}
+    >
       <Text>Log out</Text>
     </Button>
   </Content>

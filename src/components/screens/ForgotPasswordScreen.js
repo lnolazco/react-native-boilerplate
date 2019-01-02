@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Container,
-  Header,
   Content,
   Form,
   Item,
@@ -10,6 +9,7 @@ import {
   Button,
   Text,
 } from 'native-base';
+import NavHeader from '../base/NavHeader';
 
 export default class SignInScreen extends React.Component {
   static navigationOptions = {
@@ -24,7 +24,7 @@ export default class SignInScreen extends React.Component {
   render() {
     return (
       <Container>
-        <Header />
+        <NavHeader title="Forgot password" />
         <Content>
           <Form>
             <Item floatingLabel>
