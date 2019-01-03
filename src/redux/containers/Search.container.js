@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { fetchUsers, fetchMoreUsers } from '../actions/users';
+import { fetchUsers, fetchMoreUsers, openFilter, closeFilter } from '../actions/users';
 import { fetchProfile } from '../actions/profile';
 import { navigateToUserProfile } from '../actions/nav';
 
@@ -10,6 +10,9 @@ const mapStateToProps = state => ({
     isLoadingMore: state.users.isLoadingMore,
     dataSource: state.users.dataSource,
   },
+  filterMapState: {
+    isFilterOpen: state.users.isFilterOpen,
+  }
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,11 +22,16 @@ const mapDispatchToProps = dispatch => ({
     onSelectRow: userId =>
       dispatch(fetchProfile(userId, () => dispatch(navigateToUserProfile()))),
   },
+  filterMapDispatch: {
+    onOpenFilter: () => dispatch(openFilter()),
+    onCloseFilter: () => dispatch(closeFilter()),
+  }
 });
 
 const SearchContainer = props =>
   props.render({
     results: { ...props.resultsMapState, ...props.resultsMapDispatch },
+    filter: { ...props.filterMapState, ...props.filterMapDispatch },
   });
 
 export default connect(

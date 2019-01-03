@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Container, Icon } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
-// import ScreenWrapper from '../base/ScreenWrapper';
 import SearchContainer from '../../redux/containers/Search.container';
+import UsersFilter from '../base/UsersFilter';
 import ListUsersView from '../views/ListUsersView';
 
 export default class SearchScreen extends Component {
@@ -23,7 +24,12 @@ export default class SearchScreen extends Component {
       <Container>
         <NavHeader title="Search" />
         <SearchContainer
-          render={props => <ListUsersView {...props.results} />}
+          render={props => (
+            <View>
+              <UsersFilter {...props.filter} />
+              <ListUsersView {...props.results} />
+            </View>
+          )}
         />
       </Container>
     );

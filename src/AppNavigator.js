@@ -10,8 +10,8 @@ import ForgotPasswordScreen from './components/screens/ForgotPasswordScreen';
 import ChatScreen from './components/screens/ChatScreen';
 import SearchScreen from './components/screens/SearchScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
-import SignInContainer from './redux/containers/SignIn.container';
-import AuthContainer from './redux/containers/Auth.container';
+import SignInScreen from './components/screens/SignInScreen';
+import AuthScreen from './components/screens/AuthScreen';
 
 // To customize the menu:
 // https://codeburst.io/custom-drawer-using-react-navigation-80abbab489f7
@@ -23,14 +23,14 @@ const AppStack = createDrawerNavigator({
 });
 
 const AuthStack = createStackNavigator({
-  SignIn: SignInContainer,
+  SignIn: SignInScreen,
   ForgotPassword: ForgotPasswordScreen,
 });
 
 const AppNavigator = createAppContainer(
   createSwitchNavigator(
     {
-      AuthLoading: AuthContainer,
+      AuthLoading: AuthScreen,
       App: AppStack,
       Auth: AuthStack,
     },

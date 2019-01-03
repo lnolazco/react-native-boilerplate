@@ -1,25 +1,16 @@
+import React from 'react';
 import { connect } from 'react-redux';
 
-import { isAuthenticatedSelector } from '../selectors/auth';
 import { checkAuthentication } from '../actions/auth';
-import { navigateToAuth, navigateToApp } from '../actions/nav';
 import LoadingScreen from '../../components/screens/LoadingScreen';
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => {
-    dispatch((_, getState) => {
-      dispatch(checkAuthentication()).then(() => {
-        const state = getState();
-
-        isAuthenticated = isAuthenticatedSelector(state);
-
-        dispatch(isAuthenticated ? navigateToApp() : navigateToAuth());
-      });
-    });
-  },
+  onLoad: () => dispatch(checkAuthentication()),
 });
+
+const AuthContainer = props => props.render(props);
 
 export default connect(
   null,
   mapDispatchToProps
-)(LoadingScreen);
+)(AuthContainer);

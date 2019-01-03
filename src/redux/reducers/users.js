@@ -7,6 +7,7 @@ const initialState = {
   dataSource: null,
   data: null,
   page: 1,
+  isFilterOpen: false,
 };
 
 export default function(state = initialState, action) {
@@ -41,6 +42,10 @@ export default function(state = initialState, action) {
         dataSource: state.dataSource.cloneWithRows(data2),
         data: data2,
       };
+      case ActionType.OPEN_SEARCH_FILTER:
+        return { ...state, isFilterOpen: true };
+      case ActionType.CLOSE_SEARCH_FILTER:
+        return { ...state, isFilterOpen: false };
     default:
       return state;
   }

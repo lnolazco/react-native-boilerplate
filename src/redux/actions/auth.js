@@ -10,39 +10,45 @@ export const ActionType = {
   LOG_OUT: 'LOG_OUT',
 };
 
+const authRequestInitAction = () => ({ type: ActionType.REQUEST_INIT });
+const authFailedAction = () => ({ type: ActionType.REQUEST_FAILED });
+const authSignedInAction = () => ({ type: ActionType.SIGN_IN });
+const authLogOutAction = () => ({ type: ActionType.LOG_OUT });
+
 export const signIn = (email, password) => async dispatch => {
-  dispatch({ type: ActionType.REQUEST_INIT });
+  dispatch(authRequestInitAction());
 
   const response = await fetchSignIn(email, password);
   if (response.err) {
-    return dispatch({ type: ActionType.REQUEST_FAILED });
+    return dispatch(authFailedAction());
   }
 
   await AsyncStorage.setItem(AUTH_USER_KEY, response.token);
 
-  dispatch({ type: ActionType.SIGN_IN });
+  dispatch(authSignedInAction());
 
   dispatch(navigateToApp());
 };
 
 export const logOut = () => async dispatch => {
+  const response = await fetchLogOut();
+
   await AsyncStorage.removeItem(AUTH_USER_KEY);
 
-  const response = await fetchLogOut();
-  console.log('Logout ', response);
-
-  dispatch({ type: ActionType.LOG_OUT });
+  dispatch(authLogOutAction());
 
   dispatch(navigateToLogin());
 };
 
 export const checkAuthentication = () => async dispatch => {
-  dispatch({ type: ActionType.REQUEST_INIT });
+  dispatch(authRequestInitAction());
 
   const token = await AsyncStorage.getItem(AUTH_USER_KEY);
 
-  const action = {
-    type: token !== null ? ActionType.SIGN_IN : ActionType.LOG_OUT,
-  };
-  dispatch(action);
+  if (token !== null) {
+    dispatch(authSignedInAction());
+    return dispatch(navigateToApp());
+  }
+  dispatch(authLogOutAction());
+  return dispatch(navigateToLogin());
 };

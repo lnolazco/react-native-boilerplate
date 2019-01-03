@@ -6,6 +6,8 @@ export const ActionType = {
   FETCH_FAILED: 'FETCH_FAILED',
   FETCH_MORE_REQUESTED: 'FETCH_MORE_REQUESTED',
   FETCH_MORE_SUCCEED: 'FETCH_MORE_SUCCEED',
+  OPEN_SEARCH_FILTER: 'OPEN_SEARCH_FILTER',
+  CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',   
 };
 
 export const fetchUsers = () => (dispatch, getState) => {
@@ -56,3 +58,6 @@ export const fetchMoreUsers = () => (dispatch, getState) => {
       });
     });
 };
+
+export const openFilter = () => ({ type: ActionType.OPEN_SEARCH_FILTER });
+export const closeFilter = () => ({ type: ActionType.CLOSE_SEARCH_FILTER });
