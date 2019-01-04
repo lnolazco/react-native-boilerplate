@@ -1,4 +1,5 @@
 import fetchApi from '../../apis/profile';
+import { navigateToUserProfile } from './nav';
 
 export const ActionType = {
   FETCH_REQUESTED: 'PROFILE_FETCH_REQUESTED',
@@ -6,19 +7,19 @@ export const ActionType = {
   FETCH_FAILED: 'PROFILE_FETCH_FAILED',
 };
 
-export const fetchProfile = (userId, onSuccess) => dispatch => {
+export const fetchProfile = userId => dispatch => {
   dispatch({
     type: ActionType.FETCH_REQUESTED,
   });
 
   fetchApi(userId)
     .then(user => {
-      onSuccess();
-
       dispatch({
         type: ActionType.FETCH_SUCCEED,
         payload: user,
       });
+
+      dispatch(navigateToUserProfile());
     })
     .catch(error => {
       console.error(error);
@@ -29,6 +30,4 @@ export const fetchProfile = (userId, onSuccess) => dispatch => {
     });
 };
 
-export const fetchMyUserProfile = () => dispatch => {
-  
-}
+export const fetchMyUserProfile = () => fetchProfile('myself');

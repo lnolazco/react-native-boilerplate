@@ -3,6 +3,7 @@ import { Container, Icon } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
 import ProfileContainer from '../../redux/containers/Profile.container';
+import ProfileView from '../views/ProfileView';
 
 export default class ProfileScreen extends Component {
   static navigationOptions = {
@@ -20,7 +21,7 @@ export default class ProfileScreen extends Component {
     return (
       <Container>
         <NavHeader title="Profile" backButton={true} />
-        <ProfileContainer />
+        <ProfileContainer render={props => <ProfileView {...props} />} />
       </Container>
     );
   }
