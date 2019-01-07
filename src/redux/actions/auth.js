@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { fetchSignIn, fetchLogOut } from '../../apis/auth';
 import { AUTH_USER_KEY } from '../../config/constants';
 import { navigateToApp, navigateToLogin } from './nav';
+import { fetchMyUserProfile } from './profile';
 
 export const ActionType = {
   REQUEST_INIT: 'REQUEST_INIT',
@@ -31,7 +32,7 @@ export const signIn = (email, password) => async dispatch => {
 };
 
 export const logOut = () => async dispatch => {
-  const response = await fetchLogOut();
+  await fetchLogOut();
 
   await AsyncStorage.removeItem(AUTH_USER_KEY);
 
@@ -47,6 +48,7 @@ export const checkAuthentication = () => async dispatch => {
 
   if (token !== null) {
     dispatch(authSignedInAction());
+    dispatch(fetchMyUserProfile());
     return dispatch(navigateToApp());
   }
   dispatch(authLogOutAction());

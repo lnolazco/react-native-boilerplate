@@ -36,5 +36,10 @@ export default props => (
     >
       <Text>Log out</Text>
     </Button>
+    <Card>
+      <CardItem header button>
+        <Text>{props.user.title}</Text>
+      </CardItem>
+    </Card>
   </Content>
 );

@@ -3,6 +3,7 @@ import { ActionType } from '../actions/profile';
 const initialState = {
   isLoading: false,
   data: null,
+  myselfData: null,
 };
 
 export default function(state = initialState, action) {
@@ -14,6 +15,12 @@ export default function(state = initialState, action) {
         ...state,
         isLoading: false,
         data: action.payload,
+      };
+    case ActionType.FETCH_MYSELF_SUCCEED:
+      return {
+        ...state,
+        isLoading: false,
+        myselfData: action.payload,
       };
     case ActionType.FETCH_FAILED:
       return initialState;

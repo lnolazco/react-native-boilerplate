@@ -3,7 +3,6 @@ import { Container } from 'native-base';
 
 import SignInContainer from '../../redux/containers/SignIn.container';
 import SignInView from '../views/SignInView';
-import NavHeader from '../base/NavHeader';
 import LoadingScreen from './LoadingScreen';
 
 export default class SignInScreen extends React.Component {
@@ -14,11 +13,11 @@ export default class SignInScreen extends React.Component {
   render() {
     return (
       <Container>
-        <SignInContainer render={props => 
-          props.isLoading
-          ? <LoadingScreen />
-          : <SignInView {...props} />
-        } />
+        <SignInContainer
+          render={props =>
+            props.isLoading ? <LoadingScreen /> : <SignInView {...props} />
+          }
+        />
       </Container>
     );
   }

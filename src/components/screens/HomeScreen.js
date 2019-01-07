@@ -4,6 +4,7 @@ import { Container, Icon } from 'native-base';
 import HomeContainer from '../../redux/containers/Home.container';
 import HomeView from '../views/HomeView';
 import NavHeader from '../base/NavHeader';
+import LoadingScreen from './LoadingScreen';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -21,7 +22,11 @@ export default class HomeScreen extends React.Component {
     return (
       <Container>
         <NavHeader title="Home" />
-        <HomeContainer render={props => <HomeView {...props} />} />
+        <HomeContainer
+          render={props =>
+            props.isLoading ? <LoadingScreen /> : <HomeView {...props} />
+          }
+        />
       </Container>
     );
   }
