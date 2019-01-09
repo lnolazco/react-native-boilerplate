@@ -17,7 +17,7 @@ export const fetchUsers = () => (dispatch, getState) => {
     type: ActionType.FETCH_REQUESTED,
   });
 
-  fetchUsersApi(page)
+  fetchUsersApi({ page })
     .then(users => {
       dispatch({
         type: ActionType.FETCH_SUCCEED,
@@ -41,7 +41,7 @@ export const fetchMoreUsers = () => (dispatch, getState) => {
   dispatch({
     type: ActionType.FETCH_MORE_REQUESTED,
   });
-  fetchUsersApi(page)
+  fetchUsersApi({ page })
     .then(users => {
       dispatch({
         type: ActionType.FETCH_MORE_SUCCEED,

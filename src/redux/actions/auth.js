@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { fetchSignIn, fetchLogOut } from '../../apis/auth';
 import { AUTH_USER_KEY } from '../../config/constants';
-import { navigateToApp, navigateToLogin } from './nav';
+import { navigateToApp, navigateToLogin, navigateToForgotPassword } from './nav';
 import { fetchMyUserProfile } from './profile';
 
 export const ActionType = {
@@ -54,3 +54,5 @@ export const checkAuthentication = () => async dispatch => {
   dispatch(authLogOutAction());
   return dispatch(navigateToLogin());
 };
+
+export const forgotPassword = () => navigateToForgotPassword();
