@@ -70,3 +70,10 @@ Screen definition:
   />
 </SearchScreen>
 ```
+
+```js
+<View>
+  <NavHeader title="Search" />
+  <SearchLogic props
+```
+

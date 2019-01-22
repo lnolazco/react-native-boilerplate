@@ -1,33 +1,34 @@
 import { connect } from 'react-redux';
 
-import {
-  fetchUsers,
-  fetchMoreUsers,
-  openFilter,
-  closeFilter,
-} from '../actions/users';
+// import {
+//   fetchUsers,
+//   fetchMoreUsers,
+//   openFilter,
+//   closeFilter,
+// } from '../actions/users';
+import SearchLogic from '../logic/SearchLogic';
 import { fetchProfile } from '../actions/profile';
 
 const mapStateToProps = state => ({
   resultsMapState: {
-    isLoading: state.users.isLoading,
-    isLoadingMore: state.users.isLoadingMore,
-    dataSource: state.users.dataSource,
+    isLoading: state.search.isLoading,
+    isLoadingMore: state.search.isLoadingMore,
+    dataSource: state.search.dataSource,
   },
   filterMapState: {
-    isFilterOpen: state.users.isFilterOpen,
+    isFilterOpen: state.search.isFilterOpen,
   },
 });
 
 const mapDispatchToProps = dispatch => ({
   resultsMapDispatch: {
-    onLoad: () => dispatch(fetchUsers()),
-    onEndReached: () => dispatch(fetchMoreUsers()),
+    onLoad: () => dispatch(SearchLogic.fetchUsers()),
+    onEndReached: () => dispatch(SearchLogic.fetchMoreUsers()),
     onSelectRow: userId => dispatch(fetchProfile(userId)),
   },
   filterMapDispatch: {
-    onOpenFilter: () => dispatch(openFilter()),
-    onCloseFilter: () => dispatch(closeFilter()),
+    onOpenFilter: () => dispatch(SearchLogic.openFilter()),
+    onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
   },
 });
 
