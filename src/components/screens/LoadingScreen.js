@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -24,6 +23,5 @@ class LoadingScreen extends React.Component {
     );
   }
 }
-
 
 export default LoadingScreen;

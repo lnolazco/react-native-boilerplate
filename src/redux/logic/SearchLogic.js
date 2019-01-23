@@ -17,10 +17,11 @@ const ActionType = {
   FETCH_MORE_REQUESTED: 'FETCH_MORE_REQUESTED',
   FETCH_MORE_SUCCEED: 'FETCH_MORE_SUCCEED',
   OPEN_SEARCH_FILTER: 'OPEN_SEARCH_FILTER',
-  CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',   
+  CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',
 };
 
 export default class SearchLogic {
+  // action
   static fetchUsers() {
     return (dispatch, getState) => {
       const { page } = getState().search;
@@ -45,9 +46,9 @@ export default class SearchLogic {
             error,
           });
         });
-    }
-  };
-
+    };
+  }
+  // action
   static fetchMoreUsers() {
     return (dispatch, getState) => {
       const { page } = getState().search;
@@ -71,12 +72,19 @@ export default class SearchLogic {
             error,
           });
         });
-    }
-  };
+    };
+  }
 
-  static openFilter() { return ({ type: ActionType.OPEN_SEARCH_FILTER }) };
-  static closeFilter() { return ({ type: ActionType.CLOSE_SEARCH_FILTER }) };
+  // action
+  static openFilter() {
+    return { type: ActionType.OPEN_SEARCH_FILTER };
+  }
+  // action
+  static closeFilter() {
+    return { type: ActionType.CLOSE_SEARCH_FILTER };
+  }
 
+  // reducer
   static reducer(state = initialState, action) {
     switch (action.type) {
       case ActionType.FETCH_REQUESTED:
@@ -109,10 +117,10 @@ export default class SearchLogic {
           dataSource: state.dataSource.cloneWithRows(data2),
           data: data2,
         };
-        case ActionType.OPEN_SEARCH_FILTER:
-          return { ...state, isFilterOpen: true };
-        case ActionType.CLOSE_SEARCH_FILTER:
-          return { ...state, isFilterOpen: false };
+      case ActionType.OPEN_SEARCH_FILTER:
+        return { ...state, isFilterOpen: true };
+      case ActionType.CLOSE_SEARCH_FILTER:
+        return { ...state, isFilterOpen: false };
       default:
         return state;
     }

@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { Container, Icon } from 'native-base';
+import { Container, Icon, Button } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
-import SearchContainer from '../../redux/containers/Search.container';
+import SearchConnector from '../../redux/connectors/Search.connector';
 import UsersFilter from '../base/UsersFilter';
 import ListUsersView from '../views/ListUsersView';
+import { SearchIcon } from '../base/Icons';
 
-export default class SearchScreen extends Component {
-  static navigationOptions = {
-    drawerLabel: 'List View',
-    drawerIcon: () => (
-      <Icon
-        ios="ios-people"
-        android="md-people"
-        style={{ fontSize: 20, color: 'red' }}
-      />
-    ),
-  };
+const SearchScreen = () => (
+  <Container>
+    <SearchConnector
+      render={props => (
+        <View>
+          <NavHeader
+            title="Search"
+            buttonsRight={[
+              <SearchIcon
+                key="search-icon"
+                onPress={props.filter.onOpenFilter}
+              />,
+            ]}
+          />
+          <UsersFilter {...props.filter} />
+          <ListUsersView {...props.results} />
+        </View>
+      )}
+    />
+  </Container>
+);
 
-  render() {
-    return (
-      <Container>
-        <NavHeader title="Search" />
-        <SearchContainer
-          render={props => (
-            <View>
-              <UsersFilter {...props.filter} />
-              <ListUsersView {...props.results} />
-            </View>
-          )}
-        />
-      </Container>
-    );
-  }
-}
+export default SearchScreen;

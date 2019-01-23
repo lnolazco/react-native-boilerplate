@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon, Header, Left, Button, Body, Title, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
-const NavHeader = ({ navigation, title, backButton }) => (
+const NavHeader = ({ navigation, title, backButton, buttonsRight }) => (
   <Header>
     <Left>
       <Button
@@ -22,10 +22,11 @@ const NavHeader = ({ navigation, title, backButton }) => (
         )}
       </Button>
     </Left>
+
     <Body>
       <Title>{title}</Title>
     </Body>
-    <Right />
+    <Right>{buttonsRight ? buttonsRight : null}</Right>
   </Header>
 );
 

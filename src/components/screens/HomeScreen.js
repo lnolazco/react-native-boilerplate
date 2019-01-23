@@ -1,33 +1,20 @@
 import React from 'react';
-import { Container, Icon } from 'native-base';
+import { Container } from 'native-base';
 
 import HomeContainer from '../../redux/containers/Home.container';
 import HomeView from '../views/HomeView';
 import NavHeader from '../base/NavHeader';
 import LoadingScreen from './LoadingScreen';
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-    drawerIcon: () => (
-      <Icon
-        ios="ios-menu"
-        android="md-menu"
-        style={{ fontSize: 20, color: 'red' }}
-      />
-    ),
-  };
+const HomeScreen = () => (
+  <Container>
+    <NavHeader title="Home" />
+    <HomeContainer
+      render={props =>
+        props.isLoading ? <LoadingScreen /> : <HomeView {...props} />
+      }
+    />
+  </Container>
+);
 
-  render() {
-    return (
-      <Container>
-        <NavHeader title="Home" />
-        <HomeContainer
-          render={props =>
-            props.isLoading ? <LoadingScreen /> : <HomeView {...props} />
-          }
-        />
-      </Container>
-    );
-  }
-}
+export default HomeScreen;

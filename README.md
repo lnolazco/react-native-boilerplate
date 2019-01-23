@@ -55,25 +55,35 @@ expo start
     - /selectors Pure functions gets data from store
     - store.js
 
+Proposal:
+
+- /redux
+  - /logic -> Contiene la logica de la app, agrupada por areas.. por ejemplo... autenticacion, search...
+    - SearchLogic.js
+  - /connectors -> Conecta la logica con la vista (ui components)
+    - Search.connector.js
+  - /selectors -> Functiones que recuperan la informacion guardada.
+    - search.js
+  - store.js - set el store de la app.
+
+SearchLogic:
+Js Class que contiene 2 partes:
+
+- actions: funciones estaticas que dispatch un action
+- reducer() funcion que actualiza el store cada vez que se ejecuta una action.
+
 Screen definition:
 
 ```js
 <SearchScreen>
   <ScreenHeader title="Search users" />
-  <SearchContainer
+  <SearchLogic
     render={props => (
-      <Content>
+      <View>
         <UsersFilter {...props.filter} />
         <ListUsersView {...props.results} />
-      </Content>
+      </View>
     )}
   />
 </SearchScreen>
 ```
-
-```js
-<View>
-  <NavHeader title="Search" />
-  <SearchLogic props
-```
-

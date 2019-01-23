@@ -1,22 +1,22 @@
 import { connect } from 'react-redux';
 
-// import {
-//   fetchUsers,
-//   fetchMoreUsers,
-//   openFilter,
-//   closeFilter,
-// } from '../actions/users';
 import SearchLogic from '../logic/SearchLogic';
 import { fetchProfile } from '../actions/profile';
+import {
+  searchIsLoading,
+  searchIsLoadingMore,
+  searchData,
+  filterIsOpen,
+} from '../selectors/search';
 
 const mapStateToProps = state => ({
   resultsMapState: {
-    isLoading: state.search.isLoading,
-    isLoadingMore: state.search.isLoadingMore,
-    dataSource: state.search.dataSource,
+    isLoading: searchIsLoading(state),
+    isLoadingMore: searchIsLoadingMore(state),
+    dataSource: searchData(state),
   },
   filterMapState: {
-    isFilterOpen: state.search.isFilterOpen,
+    isFilterOpen: filterIsOpen(state),
   },
 });
 

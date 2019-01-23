@@ -12,10 +12,6 @@ import {
 import NavHeader from '../base/NavHeader';
 
 export default class SignInScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Forgot password',
-  };
-
   send = () => {
     // call action
     this.props.navigation.navigate('SignIn');

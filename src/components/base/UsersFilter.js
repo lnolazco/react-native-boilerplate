@@ -1,11 +1,11 @@
 import React from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import { Modal, View } from 'react-native';
+import { Container, Button, Text } from 'native-base';
 
-import { Container } from 'native-base';
 import NavHeader from './NavHeader';
 
-const UsersFilter = (props) => (
-  <View style={{marginTop: 22}}>
+const UsersFilter = props => (
+  <View>
     <Modal
       animationType="slide"
       transparent={false}
@@ -13,23 +13,15 @@ const UsersFilter = (props) => (
     >
       <Container>
         <NavHeader title="Home" />
-         <TouchableHighlight
-            onPress={() => {
-              props.onCloseFilter();
-            }}>
-            <Text>Hide Modal</Text>
-          </TouchableHighlight>
+        <Button
+          onPress={() => {
+            props.onCloseFilter();
+          }}
+        >
+          <Text>Hide Modal</Text>
+        </Button>
       </Container>
-
-         
     </Modal>
-
-    <TouchableHighlight
-      onPress={() => {
-        props.onOpenFilter();
-      }}>
-      <Text>Show Modal</Text>
-    </TouchableHighlight>
   </View>
 );
 
