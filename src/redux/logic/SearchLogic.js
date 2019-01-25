@@ -1,6 +1,13 @@
 import { ListView } from 'react-native';
 import fetchUsersApi from '../../apis/users';
 
+const SearchStatus = {
+  NONE: 'NONE',
+  REQUEST: 'REQUEST',
+  SUCCESS: 'SUCCESS',
+  FAILED: 'FAILED',
+};
+
 const initialState = {
   isLoading: true,
   isLoadingMore: false,
@@ -8,6 +15,7 @@ const initialState = {
   data: null,
   page: 1,
   isFilterOpen: false,
+  status: SearchStatus.NONE,
 };
 
 const ActionType = {
@@ -20,57 +28,67 @@ const ActionType = {
   CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',
 };
 
+const searchRequestedAction = () => ({
+  type: ActionType.FETCH_REQUESTED,
+});
+
+const searchMoreRequestedAction = () => ({
+  type: ActionType.FETCH_MORE_REQUESTED,
+});
+
+const searchSuccedAction = users => ({
+  type: ActionType.FETCH_SUCCEED,
+  payload: {
+    data: users,
+  },
+});
+
+const searchMoreSuccedAction = users => ({
+  type: ActionType.FETCH_MORE_SUCCEED,
+  payload: {
+    data: users,
+  },
+});
+
+const searchFailedAction = error => ({
+  type: ActionType.FETCH_FAILED,
+  error,
+});
+
 export default class SearchLogic {
   // action
   static fetchUsers() {
     return (dispatch, getState) => {
       const { page } = getState().search;
 
-      dispatch({
-        type: ActionType.FETCH_REQUESTED,
-      });
+      dispatch(searchRequestedAction());
 
       fetchUsersApi({ page })
         .then(users => {
-          dispatch({
-            type: ActionType.FETCH_SUCCEED,
-            payload: {
-              data: users,
-            },
-          });
+          dispatch(searchSuccedAction(users));
         })
         .catch(error => {
-          console.error(error);
-          dispatch({
-            type: ActionType.FETCH_FAILED,
-            error,
-          });
+          dispatch(searchFailedAction(error));
         });
     };
   }
   // action
   static fetchMoreUsers() {
     return (dispatch, getState) => {
-      const { page } = getState().search;
+      const state = getState();
+      const { page, status } = state.search;
 
-      dispatch({
-        type: ActionType.FETCH_MORE_REQUESTED,
-      });
+      if (status === SearchStatus.REQUEST) {
+        return;
+      }
+
+      dispatch(searchMoreRequestedAction());
       fetchUsersApi({ page })
         .then(users => {
-          dispatch({
-            type: ActionType.FETCH_MORE_SUCCEED,
-            payload: {
-              data: users,
-            },
-          });
+          dispatch(searchMoreSuccedAction(users));
         })
         .catch(error => {
-          console.error(error);
-          dispatch({
-            type: ActionType.FETCH_FAILED,
-            error,
-          });
+          dispatch(searchFailedAction(error));
         });
     };
   }
@@ -88,7 +106,7 @@ export default class SearchLogic {
   static reducer(state = initialState, action) {
     switch (action.type) {
       case ActionType.FETCH_REQUESTED:
-        return { ...state, isLoading: true };
+        return { ...state, isLoading: true, status: SearchStatus.REQUEST };
       case ActionType.FETCH_SUCCEED:
         let ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2,
@@ -100,14 +118,21 @@ export default class SearchLogic {
           dataSource: ds.cloneWithRows(data1),
           data: data1,
           page: 2,
+          status: SearchStatus.SUCCESS,
         };
       case ActionType.FETCH_FAILED:
-        return { ...state, isLoading: false, isLoadingMore: false };
+        return {
+          ...state,
+          isLoading: false,
+          isLoadingMore: false,
+          status: SearchStatus.FAILED,
+        };
       case ActionType.FETCH_MORE_REQUESTED:
         return {
           ...state,
           isLoadingMore: true,
           page: state.page + 1,
+          status: SearchStatus.REQUEST,
         };
       case ActionType.FETCH_MORE_SUCCEED:
         const data2 = state.data.concat(action.payload.data);
@@ -116,6 +141,7 @@ export default class SearchLogic {
           isLoadingMore: false,
           dataSource: state.dataSource.cloneWithRows(data2),
           data: data2,
+          status: SearchStatus.SUCCESS,
         };
       case ActionType.OPEN_SEARCH_FILTER:
         return { ...state, isFilterOpen: true };

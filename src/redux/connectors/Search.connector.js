@@ -7,6 +7,7 @@ import {
   searchIsLoadingMore,
   searchData,
   filterIsOpen,
+  searchStatus,
 } from '../selectors/search';
 
 const mapStateToProps = state => ({
@@ -14,6 +15,7 @@ const mapStateToProps = state => ({
     isLoading: searchIsLoading(state),
     isLoadingMore: searchIsLoadingMore(state),
     dataSource: searchData(state),
+    status: searchStatus(state),
   },
   filterMapState: {
     isFilterOpen: filterIsOpen(state),

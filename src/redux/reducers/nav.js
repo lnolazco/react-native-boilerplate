@@ -44,6 +44,9 @@ export default function nav(state = initialState, action) {
     case ActionType.NAV_USERPROFILE:
       nextState = navigate({ routeName: 'Profile' }, state);
       break;
+    case ActionType.NAV_TO:
+      nextState = navigate({ routeName: action.payload.route }, state);
+      break;
     default:
       nextState = AppNavigator.router.getStateForAction(action, state);
       break;

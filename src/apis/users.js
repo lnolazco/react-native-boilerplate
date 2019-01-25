@@ -10,14 +10,13 @@ export default async ({
   minimumAge,
   maximumAge,
 }) => {
-
   console.log('users api page param', page);
 
   const params = [
-    'per_page=40',
+    'per_page=15',
     'radius=50',
     'city_number=37995,37996,37997,37998',
-    'type=global'
+    'type=global',
   ];
 
   params.push(`page=${page}`);

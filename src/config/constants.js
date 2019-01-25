@@ -17,6 +17,33 @@ export const THUMBS_PATH = 'https://www.mignonneapi.com/menu_thumbs';
 
 export const SIGNUP_URL = 'https://www.mignonne.com/inscription.php';
 
+export const MENU_ROUTES = [
+  {
+    name: 'Home New',
+    route: 'Home',
+    icon: 'menu',
+  },
+  {
+    name: 'Messages',
+    route: 'Chat',
+    icon: 'chatboxes',
+    badge: {
+      text: 'New',
+      backgroundColor: '#BE6F50',
+    },
+  },
+  {
+    name: 'Search',
+    route: 'Search',
+    icon: 'people',
+  },
+  {
+    name: 'Demo list',
+    route: 'Demo',
+    icon: 'people',
+  },
+];
+
 const icons = [
   'ios-add',
   'ios-add-circle',

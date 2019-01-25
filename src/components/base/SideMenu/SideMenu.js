@@ -28,7 +28,7 @@ routes = [
 ]
 */
 
-const SideMenu = ({ navigation, routes }) => (
+const SideMenu = ({ navigateTo, routes }) => (
   <Container>
     <Content bounces={false} style={styles.content}>
       {/* <Image source={drawerCover} style={styles.drawerCover} />
@@ -36,11 +36,7 @@ const SideMenu = ({ navigation, routes }) => (
       <List
         dataArray={routes}
         renderRow={data => (
-          <ListItem
-            button
-            noBorder
-            onPress={() => navigation.navigate(data.route)}
-          >
+          <ListItem button noBorder onPress={() => navigateTo(data.route)}>
             <Left>
               <Icon active name={data.icon} style={styles.icon} />
               <Text style={styles.text}>{data.name}</Text>

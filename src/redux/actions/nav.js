@@ -8,6 +8,7 @@ export const ActionType = {
   NAV_CHAT: 'NAV_CHAT',
   NAV_SEARCH: 'NAV_SEARCH',
   NAV_USERPROFILE: 'NAV_USERPROFILE',
+  NAV_TO: 'NAV_TO',
 };
 
 export const navigateToAuth = () => ({
@@ -44,4 +45,11 @@ export const navigateToSearch = () => ({
 
 export const navigateToUserProfile = () => ({
   type: ActionType.NAV_USERPROFILE,
+});
+
+export const navigateTo = route => ({
+  type: ActionType.NAV_TO,
+  payload: {
+    route,
+  },
 });

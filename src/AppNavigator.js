@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   createSwitchNavigator,
   createStackNavigator,
@@ -6,6 +7,7 @@ import {
 } from 'react-navigation';
 
 import SideMenu from './components/base/SideMenu/SideMenu';
+import SideMenuConnector from './redux/connectors/SideMenu.connector';
 import HomeScreen from './components/screens/HomeScreen';
 import ForgotPasswordScreen from './components/screens/ForgotPasswordScreen';
 import ChatScreen from './components/screens/ChatScreen';
@@ -13,28 +15,7 @@ import SearchScreen from './components/screens/SearchScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
 import SignInScreen from './components/screens/SignInScreen';
 import AuthScreen from './components/screens/AuthScreen';
-
-const routes = [
-  {
-    name: 'Home New',
-    route: 'Home',
-    icon: 'menu',
-  },
-  {
-    name: 'Messages',
-    route: 'Chat',
-    icon: 'chatboxes',
-    badge: {
-      text: 'New',
-      backgroundColor: '#BE6F50',
-    },
-  },
-  {
-    name: 'Search',
-    route: 'Search',
-    icon: 'people',
-  },
-];
+import DemoList from './components/screens/DemoList';
 
 const AppStack = createDrawerNavigator(
   {
@@ -42,13 +23,13 @@ const AppStack = createDrawerNavigator(
     Chat: ChatScreen,
     Search: SearchScreen,
     Profile: ProfileScreen,
+    Demo: DemoList,
   },
   {
     initialRouteName: 'Home',
-    contentOptions: {
-      routes,
-    },
-    contentComponent: SideMenu,
+    contentComponent: () => (
+      <SideMenuConnector render={props => <SideMenu {...props} />} />
+    ),
   }
 );
 
