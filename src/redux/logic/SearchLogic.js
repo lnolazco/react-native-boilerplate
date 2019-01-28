@@ -36,17 +36,17 @@ const searchMoreRequestedAction = () => ({
   type: ActionType.FETCH_MORE_REQUESTED,
 });
 
-const searchSuccedAction = users => ({
+const searchSuccedAction = data => ({
   type: ActionType.FETCH_SUCCEED,
   payload: {
-    data: users,
+    data,
   },
 });
 
-const searchMoreSuccedAction = users => ({
+const searchMoreSuccedAction = data => ({
   type: ActionType.FETCH_MORE_SUCCEED,
   payload: {
-    data: users,
+    data,
   },
 });
 
@@ -64,8 +64,12 @@ export default class SearchLogic {
       dispatch(searchRequestedAction());
 
       fetchUsersApi({ page })
-        .then(users => {
-          dispatch(searchSuccedAction(users));
+        .then(data => {
+          if (data.error) {
+            dispatch(searchFailedAction(data.message));
+          } else {
+            dispatch(searchSuccedAction(data));
+          }
         })
         .catch(error => {
           dispatch(searchFailedAction(error));
@@ -76,16 +80,31 @@ export default class SearchLogic {
   static fetchMoreUsers() {
     return (dispatch, getState) => {
       const state = getState();
-      const { page, status } = state.search;
+      const { page, isLoading, isLoadingMore, more } = state.search;
 
-      if (status === SearchStatus.REQUEST) {
+      console.log(
+        'FETCH MORE USERS ',
+        'isLoading',
+        isLoading,
+        'isLoadingMore',
+        isLoadingMore,
+        'more',
+        more
+      );
+
+      if (isLoading || isLoadingMore || !more) {
+        console.log('Dont load');
         return;
       }
 
       dispatch(searchMoreRequestedAction());
       fetchUsersApi({ page })
-        .then(users => {
-          dispatch(searchMoreSuccedAction(users));
+        .then(data => {
+          if (data.error) {
+            dispatch(searchFailedAction(data.message));
+          } else {
+            dispatch(searchMoreSuccedAction(data));
+          }
         })
         .catch(error => {
           dispatch(searchFailedAction(error));
@@ -111,12 +130,13 @@ export default class SearchLogic {
         let ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2,
         });
-        const data1 = action.payload.data;
+        const data1 = action.payload.data.users;
         return {
           ...state,
           isLoading: false,
           dataSource: ds.cloneWithRows(data1),
           data: data1,
+          more: action.payload.data.more,
           page: 2,
           status: SearchStatus.SUCCESS,
         };
@@ -135,12 +155,13 @@ export default class SearchLogic {
           status: SearchStatus.REQUEST,
         };
       case ActionType.FETCH_MORE_SUCCEED:
-        const data2 = state.data.concat(action.payload.data);
+        const data2 = state.data.concat(action.payload.data.users);
         return {
           ...state,
           isLoadingMore: false,
           dataSource: state.dataSource.cloneWithRows(data2),
           data: data2,
+          more: action.payload.data.more,
           status: SearchStatus.SUCCESS,
         };
       case ActionType.OPEN_SEARCH_FILTER:

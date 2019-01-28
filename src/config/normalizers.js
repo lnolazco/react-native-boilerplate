@@ -20,8 +20,13 @@ export const normalizeUser = data => ({
   gallery: toGallery(data.user.gallery),
 });
 
-export const normalizeUsers = data =>
-  data.users.map(user => ({
-    ...user,
-    imageThumb: toImageThumb(user),
-  }));
+export const normalizeSearchResponse = data => ({
+  error: data.error,
+  more: data.more,
+  users: data.users
+    ? data.users.map(user => ({
+        ...user,
+        imageThumb: toImageThumb(user),
+      }))
+    : [],
+});

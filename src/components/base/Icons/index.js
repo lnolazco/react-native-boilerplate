@@ -6,3 +6,13 @@ export const SearchIcon = ({ onPress }) => (
     <Icon ios="ios-search" android="md-search" style={{ fontSize: 20 }} />
   </Button>
 );
+
+export const CloseDialogIcon = ({ onPress }) => (
+  <Button transparent onPress={onPress}>
+    <Icon
+      ios="ios-arrow-down"
+      android="md-arrow-down"
+      style={{ fontSize: 20 }}
+    />
+  </Button>
+);

@@ -4,7 +4,7 @@ import { Container, Icon, Button } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
 import SearchConnector from '../../redux/connectors/Search.connector';
-import UsersFilter from '../base/UsersFilter';
+import SearchFilter from '../views/SearchFilter';
 import ListUsersView from '../views/ListUsersView';
 import { SearchIcon } from '../base/Icons';
 
@@ -22,7 +22,7 @@ const SearchScreen = () => (
               />,
             ]}
           />
-          <UsersFilter {...props.filter} />
+          <SearchFilter {...props.filter} />
           <ListUsersView {...props.results} />
         </View>
       )}
