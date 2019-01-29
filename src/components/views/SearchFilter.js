@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Button,
   Content,
@@ -15,7 +14,15 @@ import {
 
 import Dialog from '../base/Dialog';
 import { IconBase } from '../base/Icons';
-import CountryRegionPicker from './CountryRegionPicker';
+import Picker from '../base/Pickers/Picker';
+import CountryRegionPicker from '../base/Pickers/CountryRegionPicker';
+import {
+  countries,
+  regionLabel,
+  regionLabelDefault,
+  regions,
+  genders,
+} from '../../config/constants';
 
 /*
 isFilterOpen
@@ -34,11 +41,15 @@ const SearchFilter = props => (
     <Content>
       <Form>
         <CountryRegionPicker
-          country={props.country}
-          region={props.region}
-          onCountrySelected={props.onCountrySelected}
-          onRegionSelected={props.onRegionSelected}
+          countrySelected={props.country}
+          countries={countries}
+          regionLabel={regionLabel[props.country] || regionLabelDefault}
+          regionSelected={props.region}
+          regions={regions[props.country]}
+          onCountryChange={props.onCountrySelected}
+          onRegionChange={props.onRegionSelected}
         />
+        <Picker label="Gender testing this" items={genders} />
       </Form>
       <ListItem icon>
         <Left>
