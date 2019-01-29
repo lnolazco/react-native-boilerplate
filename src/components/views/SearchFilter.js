@@ -10,10 +10,21 @@ import {
   Body,
   Right,
   Switch,
+  Form,
 } from 'native-base';
 
 import Dialog from '../base/Dialog';
+import { IconBase } from '../base/Icons';
+import CountryRegionPicker from './CountryRegionPicker';
 
+/*
+isFilterOpen
+onCloseFilter
+
+country
+region
+
+ */
 const SearchFilter = props => (
   <Dialog
     isOpen={props.isFilterOpen}
@@ -21,10 +32,18 @@ const SearchFilter = props => (
     onClose={props.onCloseFilter}
   >
     <Content>
+      <Form>
+        <CountryRegionPicker
+          country={props.country}
+          region={props.region}
+          onCountrySelected={props.onCountrySelected}
+          onRegionSelected={props.onRegionSelected}
+        />
+      </Form>
       <ListItem icon>
         <Left>
           <Button style={{ backgroundColor: '#FF9501' }}>
-            <Icon active name="airplane" />
+            <IconBase active name="airplane" />
           </Button>
         </Left>
         <Body>

@@ -16,6 +16,8 @@ const initialState = {
   page: 1,
   isFilterOpen: false,
   status: SearchStatus.NONE,
+  country: undefined,
+  region: undefined,
 };
 
 const ActionType = {
@@ -26,6 +28,8 @@ const ActionType = {
   FETCH_MORE_SUCCEED: 'FETCH_MORE_SUCCEED',
   OPEN_SEARCH_FILTER: 'OPEN_SEARCH_FILTER',
   CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',
+  COUNTRY_SELECTED: 'COUNTRY_SELECTED',
+  REGION_SELECTED: 'REGION_SELECTED',
 };
 
 const searchRequestedAction = () => ({
@@ -53,6 +57,16 @@ const searchMoreSuccedAction = data => ({
 const searchFailedAction = error => ({
   type: ActionType.FETCH_FAILED,
   error,
+});
+
+const countrySelectedAction = country => ({
+  type: ActionType.COUNTRY_SELECTED,
+  payload: { country }
+});
+
+const regionSelectedAction = region => ({
+  type: ActionType.REGION_SELECTED,
+  payload: { region }
 });
 
 export default class SearchLogic {
@@ -121,6 +135,14 @@ export default class SearchLogic {
     return { type: ActionType.CLOSE_SEARCH_FILTER };
   }
 
+  static onCountrySelected(country) {
+    return countrySelectedAction(country);
+  }
+
+  static onRegionSelected(region) {
+    return regionSelectedAction(region);
+  }
+
   // reducer
   static reducer(state = initialState, action) {
     switch (action.type) {
@@ -168,6 +190,10 @@ export default class SearchLogic {
         return { ...state, isFilterOpen: true };
       case ActionType.CLOSE_SEARCH_FILTER:
         return { ...state, isFilterOpen: false };
+      case ActionType.COUNTRY_SELECTED:
+        return {...state, country: action.payload.country }
+      case ActionType.REGION_SELECTED:
+        return {...state, region: action.payload.region }
       default:
         return state;
     }

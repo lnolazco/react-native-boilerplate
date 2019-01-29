@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Container, Icon, Button } from 'native-base';
+import { Container } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
 import SearchConnector from '../../redux/connectors/Search.connector';

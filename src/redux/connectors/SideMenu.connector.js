@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { navigateTo } from '../actions/nav';
-import { MENU_ROUTES } from '../../config/constants';
+import { routes } from '../../config/constants';
 
 const mapStateToProps = state => ({
-  routes: MENU_ROUTES,
+  routes,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -15,7 +15,9 @@ import SearchScreen from './components/screens/SearchScreen';
 import ProfileScreen from './components/screens/ProfileScreen';
 import SignInScreen from './components/screens/SignInScreen';
 import AuthScreen from './components/screens/AuthScreen';
+
 import DemoList from './components/screens/DemoList';
+import IconsScreen from './components/screens/IconsScreen'
 
 const AppStack = createDrawerNavigator(
   {
@@ -24,6 +26,7 @@ const AppStack = createDrawerNavigator(
     Search: SearchScreen,
     Profile: ProfileScreen,
     Demo: DemoList,
+    Icons: IconsScreen,
   },
   {
     initialRouteName: 'Home',

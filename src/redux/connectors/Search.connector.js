@@ -8,6 +8,8 @@ import {
   searchData,
   filterIsOpen,
   searchStatus,
+  countrySelected,
+  regionSelected,
 } from '../selectors/search';
 
 const mapStateToProps = state => ({
@@ -19,6 +21,8 @@ const mapStateToProps = state => ({
   },
   filterMapState: {
     isFilterOpen: filterIsOpen(state),
+    country: countrySelected(state),
+    region: regionSelected(state),
   },
 });
 
@@ -31,6 +35,8 @@ const mapDispatchToProps = dispatch => ({
   filterMapDispatch: {
     onOpenFilter: () => dispatch(SearchLogic.openFilter()),
     onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
+    onCountrySelected: (value) => dispatch(SearchLogic.onCountrySelected(value)),
+    onRegionSelected: (value) => dispatch(SearchLogic.onRegionSelected(value)),
   },
 });
 

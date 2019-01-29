@@ -1,18 +1,18 @@
 import React from 'react';
 import { Icon, Button } from 'native-base';
 
+export const IconBase = (props) => (
+  <Icon ios={`ios-${props.name}`} android={`md-${props.name}`} style={{ fontSize: 20 }} {...props} />
+);
+
 export const SearchIcon = ({ onPress }) => (
   <Button transparent onPress={onPress}>
-    <Icon ios="ios-search" android="md-search" style={{ fontSize: 20 }} />
+    <IconBase name="search" />
   </Button>
 );
 
 export const CloseDialogIcon = ({ onPress }) => (
   <Button transparent onPress={onPress}>
-    <Icon
-      ios="ios-arrow-down"
-      android="md-arrow-down"
-      style={{ fontSize: 20 }}
-    />
+    <IconBase name="arrow-down" />
   </Button>
 );
