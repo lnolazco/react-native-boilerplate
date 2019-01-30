@@ -7,6 +7,7 @@ export default async ({
   gender,
   country,
   region,
+  city,
   minimumAge,
   maximumAge,
 }) => {
@@ -15,14 +16,15 @@ export default async ({
   const params = [
     'per_page=15',
     'radius=50',
-    'city_number=37995,37996,37997,37998',
     'type=global',
   ];
 
   params.push(`page=${page}`);
   gender && params.push(`&gender=${gender}`);
-  params.push(`&iso=${gender || 'BE'}`);
+  params.push(`&iso=${country || 'BE'}`);
   params.push(`&region_number=${region || '1,2'}`);
+  city && params.push('city_number=37995,37996,37997,37998');
+
   minimumAge && params.push(`&age_min=${minimumAge}`);
   maximumAge && params.push(`&age_max=${age_max}`);
 

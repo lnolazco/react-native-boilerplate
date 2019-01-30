@@ -16,3 +16,9 @@ export const CloseDialogIcon = ({ onPress }) => (
     <IconBase name="arrow-down" />
   </Button>
 );
+
+export const DoneDialogIcon = ({ onPress }) => (
+  <Button transparent onPress={onPress}>
+    <IconBase name="checkmark-circle" />
+  </Button>
+);

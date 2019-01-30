@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, View } from 'react-native';
 import { Container } from 'native-base';
 
-import { CloseDialogIcon } from './Icons';
+import { CloseDialogIcon, DoneDialogIcon } from './Icons';
 import NavHeader from './NavHeader';
 
 const Dialog = props => (
@@ -13,6 +13,9 @@ const Dialog = props => (
           title={props.title}
           leftButtons={[
             <CloseDialogIcon key="close-dialog" onPress={props.onClose} />,
+          ]}
+          rightButtons={[
+            <DoneDialogIcon key="done-dialog" onPress={props.onDone} />,
           ]}
         />
         {props.children}

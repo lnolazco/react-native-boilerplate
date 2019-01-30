@@ -1,5 +1,7 @@
 import { ListView } from 'react-native';
 import fetchUsersApi from '../../apis/users';
+import { AsyncStorage } from 'react-native';
+import { FILTER_KEY } from '../../config/constants';
 
 const SearchStatus = {
   NONE: 'NONE',
@@ -59,6 +61,14 @@ const searchFailedAction = error => ({
   error,
 });
 
+const openFilterAction = () => (
+  { type: ActionType.OPEN_SEARCH_FILTER }
+);
+
+const closeFilterAction = () => (
+  { type: ActionType.CLOSE_SEARCH_FILTER }
+);
+
 const countrySelectedAction = country => ({
   type: ActionType.COUNTRY_SELECTED,
   payload: { country }
@@ -72,12 +82,14 @@ const regionSelectedAction = region => ({
 export default class SearchLogic {
   // action
   static fetchUsers() {
-    return (dispatch, getState) => {
-      const { page } = getState().search;
-
+    return async (dispatch, getState) => {
       dispatch(searchRequestedAction());
 
-      fetchUsersApi({ page })
+      const filter = await AsyncStorage.getItem(FILTER_KEY);
+
+      const { page } = getState().search;
+
+      fetchUsersApi({ ...filter && JSON.parse(filter) || {}, page })
         .then(data => {
           if (data.error) {
             dispatch(searchFailedAction(data.message));
@@ -128,12 +140,30 @@ export default class SearchLogic {
 
   // action
   static openFilter() {
-    return { type: ActionType.OPEN_SEARCH_FILTER };
+    return openFilterAction();
   }
   // action
   static closeFilter() {
-    return { type: ActionType.CLOSE_SEARCH_FILTER };
+    return closeFilterAction();
   }
+
+  static doneFilter() {
+    // save filter asyncstorage
+    // close filter
+    // fetch Search
+
+    return async (dispatch, getState) => {
+      const state = getState();
+      const filter = {
+        country: state.search.country,
+        region: state.search.region,
+      };
+      await AsyncStorage.setItem(FILTER_KEY, JSON.stringify(filter));
+
+      dispatch(closeFilterAction());
+      dispatch(SearchLogic.fetchUsers());
+    };
+  };
 
   static onCountrySelected(country) {
     return countrySelectedAction(country);
@@ -147,7 +177,7 @@ export default class SearchLogic {
   static reducer(state = initialState, action) {
     switch (action.type) {
       case ActionType.FETCH_REQUESTED:
-        return { ...state, isLoading: true, status: SearchStatus.REQUEST };
+        return { ...initialState, isLoading: true, status: SearchStatus.REQUEST };
       case ActionType.FETCH_SUCCEED:
         let ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2,

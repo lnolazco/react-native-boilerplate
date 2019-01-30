@@ -17,7 +17,7 @@ export default props => (
     <Right>
       <Picker
         mode="dropdown"
-        iosIcon={<IconBase name="arrow-down" />}
+        iosIcon={<IconBase name="arrow-forward" />}
         placeholder="Select"
         placeholderStyle={{ color: '#bfc6ea' }}
         placeholderIconColor="#007aff"

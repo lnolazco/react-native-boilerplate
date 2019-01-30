@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
   filterMapDispatch: {
     onOpenFilter: () => dispatch(SearchLogic.openFilter()),
     onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
+    onDoneFilter: () => dispatch(SearchLogic.doneFilter()),
     onCountrySelected: (value) => dispatch(SearchLogic.onCountrySelected(value)),
     onRegionSelected: (value) => dispatch(SearchLogic.onRegionSelected(value)),
   },

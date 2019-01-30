@@ -6,7 +6,7 @@ const NavHeader = ({
   navigation,
   title,
   backButton,
-  buttonsRight,
+  rightButtons,
   leftButtons,
 }) => (
   <Header>
@@ -36,7 +36,7 @@ const NavHeader = ({
     <Body>
       <Title>{title}</Title>
     </Body>
-    <Right>{buttonsRight ? buttonsRight : null}</Right>
+    <Right>{rightButtons ? rightButtons : null}</Right>
   </Header>
 );
 

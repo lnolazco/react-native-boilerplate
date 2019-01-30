@@ -15,7 +15,7 @@ const SearchScreen = () => (
         <View>
           <NavHeader
             title="Search"
-            buttonsRight={[
+            rightButtons={[
               <SearchIcon
                 key="search-icon"
                 onPress={props.filter.onOpenFilter}

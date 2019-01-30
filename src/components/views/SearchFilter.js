@@ -37,6 +37,7 @@ const SearchFilter = props => (
     isOpen={props.isFilterOpen}
     title="Filter"
     onClose={props.onCloseFilter}
+    onDone={props.onDoneFilter}
   >
     <Content>
       <Form>
