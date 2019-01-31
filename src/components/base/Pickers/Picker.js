@@ -18,11 +18,8 @@ export default props => (
     <Right>
       <Picker
         mode="dropdown"
-        iosIcon={<IconBase name="arrow-forward" />}
+        iosIcon={<IconBase active name="arrow-forward" />}
         placeholder="Select"
-        placeholderStyle={{ color: '#bfc6ea' }}
-        placeholderIconColor="#007aff"
-        // style={{ width: '100%' }}
         selectedValue={props.selectedValue}
         onValueChange={value => props.onValueChange(value)}
       >

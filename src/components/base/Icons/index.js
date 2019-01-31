@@ -1,24 +1,26 @@
 import React from 'react';
 import { Icon, Button } from 'native-base';
 
-export const IconBase = (props) => (
-  <Icon ios={`ios-${props.name}`} android={`md-${props.name}`} style={{ fontSize: 20 }} {...props} />
-);
-
-export const SearchIcon = ({ onPress }) => (
-  <Button transparent onPress={onPress}>
-    <IconBase name="search" />
+// Icon props + onPress
+export const IconBase = props => (
+  <Button transparent onPress={props.onPress}>
+    <Icon
+      ios={`ios-${props.name}`}
+      android={`md-${props.name}`}
+      style={{ fontSize: 20 }}
+      {...props}
+    />
   </Button>
 );
 
-export const CloseDialogIcon = ({ onPress }) => (
-  <Button transparent onPress={onPress}>
-    <IconBase name="arrow-down" />
-  </Button>
+export const SearchIcon = props => <IconBase name="search" {...props} />;
+
+export const SortIcon = props => <IconBase name="flash" {...props} />;
+
+export const CloseDialogIcon = props => (
+  <IconBase name="arrow-down" {...props} />
 );
 
-export const DoneDialogIcon = ({ onPress }) => (
-  <Button transparent onPress={onPress}>
-    <IconBase name="checkmark-circle" />
-  </Button>
+export const DoneDialogIcon = props => (
+  <IconBase name="checkmark-circle" {...props} />
 );

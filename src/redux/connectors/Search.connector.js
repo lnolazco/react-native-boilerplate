@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
     isFilterOpen: filterIsOpen(state),
     country: formValueSelector('searchFilterForm')(state, 'country'),
     region: formValueSelector('searchFilterForm')(state, 'region'),
+    initialValues: { picture: true },
   },
 });
 
@@ -34,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
   filterMapDispatch: {
     onOpenFilter: () => dispatch(SearchLogic.openFilter()),
     onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
-    onDoneFilter: (values) => dispatch(SearchLogic.doneFilter(values)),
+    onDoneFilter: values => dispatch(SearchLogic.doneFilter(values)),
   },
 });
 
