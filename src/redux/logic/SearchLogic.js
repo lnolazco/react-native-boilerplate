@@ -1,7 +1,8 @@
 import { ListView } from 'react-native';
 import fetchUsersApi from '../../apis/users';
-import { AsyncStorage } from 'react-native';
-import { FILTER_KEY } from '../../config/constants';
+import { searchFilterFormSelector } from '../selectors/searchFilter';
+// import { AsyncStorage } from 'react-native';
+// import { FILTER_KEY } from '../../config/constants';
 
 const SearchStatus = {
   NONE: 'NONE',
@@ -16,7 +17,6 @@ const initialState = {
   dataSource: null,
   data: null,
   page: 1,
-  isFilterOpen: false,
   status: SearchStatus.NONE,
 };
 
@@ -26,8 +26,6 @@ const ActionType = {
   FETCH_FAILED: 'FETCH_FAILED',
   FETCH_MORE_REQUESTED: 'FETCH_MORE_REQUESTED',
   FETCH_MORE_SUCCEED: 'FETCH_MORE_SUCCEED',
-  OPEN_SEARCH_FILTER: 'OPEN_SEARCH_FILTER',
-  CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',
 };
 
 const searchRequestedAction = () => ({
@@ -57,25 +55,24 @@ const searchFailedAction = error => ({
   error,
 });
 
-const openFilterAction = () => (
-  { type: ActionType.OPEN_SEARCH_FILTER }
-);
+// const openFilterAction = () => (
+//   { type: ActionType.OPEN_SEARCH_FILTER }
+// );
 
-const closeFilterAction = () => (
-  { type: ActionType.CLOSE_SEARCH_FILTER }
-);
+// const closeFilterAction = () => (
+//   { type: ActionType.CLOSE_SEARCH_FILTER }
+// );
 
 export default class SearchLogic {
   // action
   static fetchUsers() {
     return async (dispatch, getState) => {
       dispatch(searchRequestedAction());
+      const state = getState();
+      const filter = searchFilterFormSelector(state) || {};
+      const { page } = state.search;
 
-      const filter = await AsyncStorage.getItem(FILTER_KEY);
-
-      const { page } = getState().search;
-
-      fetchUsersApi({ ...filter && JSON.parse(filter) || {}, page })
+      fetchUsersApi({ ...filter, page })
         .then(data => {
           if (data.error) {
             dispatch(searchFailedAction(data.message));
@@ -93,7 +90,7 @@ export default class SearchLogic {
     return async (dispatch, getState) => {
       const state = getState();
       const { page, isLoading, isLoadingMore, more } = state.search;
-      const filter = await AsyncStorage.getItem(FILTER_KEY);
+      const filter = searchFilterFormSelector(state);
 
       console.log(
         'FETCH MORE USERS ',
@@ -112,7 +109,7 @@ export default class SearchLogic {
 
       dispatch(searchMoreRequestedAction());
 
-      fetchUsersApi({ ...filter && JSON.parse(filter) || {}, page })
+      fetchUsersApi({ ...filter, page })
         .then(data => {
           if (data.error) {
             dispatch(searchFailedAction(data.message));
@@ -126,34 +123,15 @@ export default class SearchLogic {
     };
   }
 
-  // action
-  static openFilter() {
-    return openFilterAction();
-  }
-  // action
-  static closeFilter() {
-    return closeFilterAction();
-  }
-
-  static doneFilter(values) {
-    console.log('DONE FILTER', values);
-    // save filter asyncstorage
-    // close filter
-    // fetch Search
-
-    return async (dispatch) => {
-      await AsyncStorage.setItem(FILTER_KEY, JSON.stringify(values));
-
-      dispatch(closeFilterAction());
-      dispatch(SearchLogic.fetchUsers());
-    };
-  };
-
   // reducer
   static reducer(state = initialState, action) {
     switch (action.type) {
       case ActionType.FETCH_REQUESTED:
-        return { ...initialState, isLoading: true, status: SearchStatus.REQUEST };
+        return {
+          ...initialState,
+          isLoading: true,
+          status: SearchStatus.REQUEST,
+        };
       case ActionType.FETCH_SUCCEED:
         let ds = new ListView.DataSource({
           rowHasChanged: (r1, r2) => r1 !== r2,
@@ -192,10 +170,6 @@ export default class SearchLogic {
           more: action.payload.data.more,
           status: SearchStatus.SUCCESS,
         };
-      case ActionType.OPEN_SEARCH_FILTER:
-        return { ...state, isFilterOpen: true };
-      case ActionType.CLOSE_SEARCH_FILTER:
-        return { ...state, isFilterOpen: false };
       default:
         return state;
     }

@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 
 import SearchLogic from '../logic/SearchLogic';
+import SearchFilterLogic from '../logic/SearchFilterLogic';
 import { fetchProfile } from '../actions/profile';
 import {
   searchIsLoading,
   searchIsLoadingMore,
   searchData,
-  filterIsOpen,
   searchStatus,
 } from '../selectors/search';
 
@@ -18,12 +17,6 @@ const mapStateToProps = state => ({
     dataSource: searchData(state),
     status: searchStatus(state),
   },
-  filterMapState: {
-    isFilterOpen: filterIsOpen(state),
-    country: formValueSelector('searchFilterForm')(state, 'country'),
-    region: formValueSelector('searchFilterForm')(state, 'region'),
-    initialValues: { picture: true },
-  },
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,16 +26,14 @@ const mapDispatchToProps = dispatch => ({
     onSelectRow: userId => dispatch(fetchProfile(userId)),
   },
   filterMapDispatch: {
-    onOpenFilter: () => dispatch(SearchLogic.openFilter()),
-    onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
-    onDoneFilter: values => dispatch(SearchLogic.doneFilter(values)),
+    onOpenFilter: () => dispatch(SearchFilterLogic.openFilter()),
   },
 });
 
 const SearchContainer = props =>
   props.render({
     results: { ...props.resultsMapState, ...props.resultsMapDispatch },
-    filter: { ...props.filterMapState, ...props.filterMapDispatch },
+    filter: props.filterMapDispatch,
   });
 
 export default connect(

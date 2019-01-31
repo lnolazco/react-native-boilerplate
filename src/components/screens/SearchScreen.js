@@ -1,9 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Container } from 'native-base';
 
 import NavHeader from '../base/NavHeader';
 import SearchConnector from '../../redux/connectors/Search.connector';
+import SearchFilterConnector from '../../redux/connectors/SearchFilter.connector';
 import SearchFilter from '../views/SearchFilter';
 import ListUsersView from '../base/List/ListUsersView';
 import { SearchIcon, SortIcon } from '../base/Icons';
@@ -26,7 +26,9 @@ const SearchScreen = () => (
               />,
             ]}
           />
-          <SearchFilter {...props.filter} />
+          <SearchFilterConnector
+            render={propsFilter => <SearchFilter {...propsFilter} />}
+          />
           <ListUsersView {...props.results} />
         </React.Fragment>
       )}
