@@ -18,8 +18,6 @@ const initialState = {
   page: 1,
   isFilterOpen: false,
   status: SearchStatus.NONE,
-  country: undefined,
-  region: undefined,
 };
 
 const ActionType = {
@@ -30,8 +28,6 @@ const ActionType = {
   FETCH_MORE_SUCCEED: 'FETCH_MORE_SUCCEED',
   OPEN_SEARCH_FILTER: 'OPEN_SEARCH_FILTER',
   CLOSE_SEARCH_FILTER: 'CLOSE_SEARCH_FILTER',
-  COUNTRY_SELECTED: 'COUNTRY_SELECTED',
-  REGION_SELECTED: 'REGION_SELECTED',
 };
 
 const searchRequestedAction = () => ({
@@ -69,16 +65,6 @@ const closeFilterAction = () => (
   { type: ActionType.CLOSE_SEARCH_FILTER }
 );
 
-const countrySelectedAction = country => ({
-  type: ActionType.COUNTRY_SELECTED,
-  payload: { country }
-});
-
-const regionSelectedAction = region => ({
-  type: ActionType.REGION_SELECTED,
-  payload: { region }
-});
-
 export default class SearchLogic {
   // action
   static fetchUsers() {
@@ -104,9 +90,10 @@ export default class SearchLogic {
   }
   // action
   static fetchMoreUsers() {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
       const state = getState();
       const { page, isLoading, isLoadingMore, more } = state.search;
+      const filter = await AsyncStorage.getItem(FILTER_KEY);
 
       console.log(
         'FETCH MORE USERS ',
@@ -124,7 +111,8 @@ export default class SearchLogic {
       }
 
       dispatch(searchMoreRequestedAction());
-      fetchUsersApi({ page })
+
+      fetchUsersApi({ ...filter && JSON.parse(filter) || {}, page })
         .then(data => {
           if (data.error) {
             dispatch(searchFailedAction(data.message));
@@ -147,31 +135,19 @@ export default class SearchLogic {
     return closeFilterAction();
   }
 
-  static doneFilter() {
+  static doneFilter(values) {
+    console.log('DONE FILTER', values);
     // save filter asyncstorage
     // close filter
     // fetch Search
 
-    return async (dispatch, getState) => {
-      const state = getState();
-      const filter = {
-        country: state.search.country,
-        region: state.search.region,
-      };
-      await AsyncStorage.setItem(FILTER_KEY, JSON.stringify(filter));
+    return async (dispatch) => {
+      await AsyncStorage.setItem(FILTER_KEY, JSON.stringify(values));
 
       dispatch(closeFilterAction());
       dispatch(SearchLogic.fetchUsers());
     };
   };
-
-  static onCountrySelected(country) {
-    return countrySelectedAction(country);
-  }
-
-  static onRegionSelected(region) {
-    return regionSelectedAction(region);
-  }
 
   // reducer
   static reducer(state = initialState, action) {
@@ -220,10 +196,6 @@ export default class SearchLogic {
         return { ...state, isFilterOpen: true };
       case ActionType.CLOSE_SEARCH_FILTER:
         return { ...state, isFilterOpen: false };
-      case ActionType.COUNTRY_SELECTED:
-        return {...state, country: action.payload.country }
-      case ActionType.REGION_SELECTED:
-        return {...state, region: action.payload.region }
       default:
         return state;
     }

@@ -4,6 +4,7 @@ import auth from './auth';
 import profile from './profile';
 import nav from './nav';
 import SearchLogic from '../logic/SearchLogic';
+import { reducer as formReducer } from 'redux-form';
 
 const reducers = combineReducers({
   auth,
@@ -11,6 +12,7 @@ const reducers = combineReducers({
   search: SearchLogic.reducer,
   profile,
   nav,
+  form: formReducer,
 });
 
 export default reducers;

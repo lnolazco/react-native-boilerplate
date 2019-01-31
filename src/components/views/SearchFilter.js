@@ -10,12 +10,16 @@ import {
   Right,
   Switch,
   Form,
+  Item,
+  Input,
 } from 'native-base';
+
+import { Field,reduxForm } from 'redux-form';
 
 import Dialog from '../base/Dialog';
 import { IconBase } from '../base/Icons';
 import Picker from '../base/Pickers/Picker';
-import CountryRegionPicker from '../base/Pickers/CountryRegionPicker';
+// import CountryRegionPicker from '../base/Pickers/CountryRegionPicker';
 import {
   countries,
   regionLabel,
@@ -32,26 +36,51 @@ country
 region
 
  */
+
+const FormSwitch = ({ input: { onChange, value }, label, icon }) => (
+  <ListItem icon>
+    <Left>{icon ? icon : null}</Left>
+    <Body>
+      <Text>{label}</Text>
+    </Body>
+    <Right>
+      <Switch 
+        onValueChange={(value) => onChange(value)} 
+        value={value} 
+      /> 
+    </Right>
+  </ListItem>
+);
+
+const FormPicker = ({ input: { onChange, value }, label, items, icon }) => (
+  <Picker label={label} items={items} onValueChange={onChange} selectedValue={value} icon={icon} />
+)
+
 const SearchFilter = props => (
   <Dialog
     isOpen={props.isFilterOpen}
     title="Filter"
     onClose={props.onCloseFilter}
-    onDone={props.onDoneFilter}
+    onDone={props.handleSubmit(props.onDoneFilter)}
   >
     <Content>
       <Form>
-        <CountryRegionPicker
-          countrySelected={props.country}
-          countries={countries}
-          regionLabel={regionLabel[props.country] || regionLabelDefault}
-          regionSelected={props.region}
-          regions={regions[props.country]}
-          onCountryChange={props.onCountrySelected}
-          onRegionChange={props.onRegionSelected}
+        <Field name="country" component={FormPicker} props={{ label: 'Country', items: countries }} />
+        <Field name="region" component={FormPicker} props={{
+          label: regionLabel[props.country] || regionLabelDefault,
+          items: regions[props.country] }}
         />
-        <Picker label="Gender testing this" items={genders} />
+        <Field name="gender" component={FormPicker} props={{
+          label: 'Gender',
+          items: genders,
+          icon: <IconBase active name="airplane" />
+        }} />
+        <Field name="picture" component={FormSwitch} props={{
+          label: 'Profiles with picture',
+          icon: <IconBase active name="airplane" />          
+        }} />
       </Form>
+
       <ListItem icon>
         <Left>
           <Button style={{ backgroundColor: '#FF9501' }}>
@@ -97,4 +126,6 @@ const SearchFilter = props => (
   </Dialog>
 );
 
-export default SearchFilter;
+export default reduxForm({
+  form: 'searchFilterForm'
+})(SearchFilter)

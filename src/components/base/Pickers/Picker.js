@@ -1,5 +1,5 @@
 import React from 'react';
-import { Picker, Body, Text, ListItem, Right } from 'native-base';
+import { Picker, Body, Text, ListItem, Left, Right } from 'native-base';
 
 import { IconBase } from '../Icons';
 
@@ -11,6 +11,7 @@ onValueChange
  */
 export default props => (
   <ListItem icon>
+    <Left>{props.icon ? props.icon : null}</Left>
     <Body>
       <Text>{props.label}</Text>
     </Body>

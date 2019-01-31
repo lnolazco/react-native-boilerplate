@@ -2,16 +2,18 @@ import { ApiUrls } from '../config/constants';
 import { normalizeSearchResponse } from '../config/normalizers';
 import fetchApi from './fetch';
 
-export default async ({
+export default async (filter) => {
+  const {
   page,
   gender,
   country,
   region,
   city,
+  picture,
   minimumAge,
   maximumAge,
-}) => {
-  console.log('users api page param', page);
+} = filter;
+  console.log('users api page params', filter);
 
   const params = [
     'per_page=15',
@@ -20,10 +22,11 @@ export default async ({
   ];
 
   params.push(`page=${page}`);
-  gender && params.push(`&gender=${gender}`);
-  params.push(`&iso=${country || 'BE'}`);
-  params.push(`&region_number=${region || '1,2'}`);
+  gender && params.push(`gender=${gender}`);
+  params.push(`iso=${country || 'BE'}`);
+  params.push(`region_number=${region || '1,2'}`);
   city && params.push('city_number=37995,37996,37997,37998');
+  picture && params.push('onlypic=1');
 
   minimumAge && params.push(`&age_min=${minimumAge}`);
   maximumAge && params.push(`&age_max=${age_max}`);

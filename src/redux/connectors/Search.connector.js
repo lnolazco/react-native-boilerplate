@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
 import SearchLogic from '../logic/SearchLogic';
 import { fetchProfile } from '../actions/profile';
@@ -8,8 +9,6 @@ import {
   searchData,
   filterIsOpen,
   searchStatus,
-  countrySelected,
-  regionSelected,
 } from '../selectors/search';
 
 const mapStateToProps = state => ({
@@ -21,8 +20,8 @@ const mapStateToProps = state => ({
   },
   filterMapState: {
     isFilterOpen: filterIsOpen(state),
-    country: countrySelected(state),
-    region: regionSelected(state),
+    country: formValueSelector('searchFilterForm')(state, 'country'),
+    region: formValueSelector('searchFilterForm')(state, 'region'),
   },
 });
 
@@ -35,9 +34,7 @@ const mapDispatchToProps = dispatch => ({
   filterMapDispatch: {
     onOpenFilter: () => dispatch(SearchLogic.openFilter()),
     onCloseFilter: () => dispatch(SearchLogic.closeFilter()),
-    onDoneFilter: () => dispatch(SearchLogic.doneFilter()),
-    onCountrySelected: (value) => dispatch(SearchLogic.onCountrySelected(value)),
-    onRegionSelected: (value) => dispatch(SearchLogic.onRegionSelected(value)),
+    onDoneFilter: (values) => dispatch(SearchLogic.doneFilter(values)),
   },
 });
 
